@@ -34,51 +34,52 @@ namespace SAP_API.Controllers
         /// </summary>
         /// <remarks>
         /// Sample request:
+        ///
         ///     POST /InternalLogisticsMaterialMovement
         ///     {
-        ///      "payload": [
-        ///        {
-        ///          "ExternalID": {
-        ///            "Value": "EXT20240401"
-        ///          },
-        ///          "SiteID": {
-        ///            "Value": "AT"
-        ///          },
-        ///          "TransactionDateTimeSpecified": false,
-        ///          "InventoryChangeItemGoodsMovement": [
-        ///            {
-        ///              "ExternalItemID": "10",
-        ///              "MaterialInternalID": {
-        ///                "Value": "EPKLEC0034"
+        ///        "payload": [
+        ///           {
+        ///              "ExternalID": {
+        ///                 "Value": "EXT20240401"
         ///              },
-        ///              "OwnerPartyInternalID": {
-        ///                "Value": "AT"
+        ///              "SiteID": {
+        ///                 "Value": "AT"
         ///              },
-        ///              "InventoryRestrictedUseIndicator": true,
-        ///              "InventoryStockStatusCodeSpecified": false,
-        ///              "SourceLogisticsAreaID": "CS01",
-        ///              "TargetLogisticsAreaID": "CS02",
-        ///              "InventoryItemChangeQuantity": {
-        ///                "Quantity": {
-        ///                  "unitCode": "EA",
-        ///                  "Value": 1
-        ///                },
-        ///                "QuantityTypeCode": {
-        ///                  "Value": "EA"
-        ///                }
-        ///              }
-        ///            }
-        ///          ]
-        ///        }
-        ///      ]
-        ///    }
+        ///              "TransactionDateTimeSpecified": false,
+        ///              "InventoryChangeItemGoodsMovement": [
+        ///                 {
+        ///                    "ExternalItemID": "10",
+        ///                    "MaterialInternalID": {
+        ///                       "Value": "EPKLEC0034"
+        ///                    },
+        ///                    "OwnerPartyInternalID": {
+        ///                       "Value": "AT"
+        ///                    },
+        ///                    "InventoryRestrictedUseIndicator": true,
+        ///                    "InventoryStockStatusCodeSpecified": false,
+        ///                    "SourceLogisticsAreaID": "CS01",
+        ///                    "TargetLogisticsAreaID": "CS02",
+        ///                    "InventoryItemChangeQuantity": {
+        ///                       "Quantity": {
+        ///                          "unitCode": "EA",
+        ///                          "Value": 1
+        ///                       },
+        ///                       "QuantityTypeCode": {
+        ///                          "Value": "EA"
+        ///                       }
+        ///                    }
+        ///                 }
+        ///              ]
+        ///           }
+        ///        ]
+        ///     }
         /// </remarks>
         [ProducesResponseType(typeof(ApiOkResponse<string>), 200)]
         [Produces("application/json")]
         [HttpPost]
         public async Task<IActionResult> InternalLogisticsMaterialMovement([FromBody] InternalLogisticsMaterialMovementRequest request, [FromHeader(Name = "Guru-BPM-Key")] string _)
         {
-            var endpointAddress = new EndpointAddress(_setting.CurrentValue.SAP.InventoryProcessingGoodsAndActivityConfirmationGoodsMovementIn);
+            var endpointAddress = new EndpointAddress(_setting.CurrentValue.SAP.EndPoints.InventoryProcessingGoodsAndActivityConfirmationGoodsMovementIn);
 
             CustomBinding binding = new CustomBinding();
             binding.Elements.Add(new MtomMessageEncodingBindingElement());
@@ -90,55 +91,9 @@ namespace SAP_API.Controllers
             var https = new HttpsTransportBindingElement();
             _logger.LogInformation("api: {actionName}, request: {request}", ControllerContext.ActionDescriptor.ActionName, JsonConvert.SerializeObject(request));
             var client = new InventoryProcessingGoodsAndActivityConfirmationGoodsMovementInClient(binding, endpointAddress);
-            client.ClientCredentials.UserName.UserName = _setting.CurrentValue.SAP.UserName;
-            client.ClientCredentials.UserName.Password = _setting.CurrentValue.SAP.Password;
+            client.ClientCredentials.UserName.UserName = _setting.CurrentValue.SAP.ClientCredentials.UserName;
+            client.ClientCredentials.UserName.Password = _setting.CurrentValue.SAP.ClientCredentials.Password;
 
-            //var sampleRequest = new GoodsAndActivityConfirmationGoodsMoveGAC[]
-            //{
-            //    new GoodsAndActivityConfirmationGoodsMoveGAC()
-            //    {
-            //        ExternalID = new BusinessTransactionDocumentID()
-            //        {
-            //            Value = "EXT20240401"
-            //        },
-            //        SiteID = new LocationID()
-            //        {
-            //            Value = "AT"
-            //        },
-            //        TransactionDateTime = DateTime.UtcNow,
-            //        InventoryChangeItemGoodsMovement =
-            //        [
-            //            new InventoryChangeItemGoodsMovement()
-            //            {
-            //                ExternalItemID = "10",
-            //                MaterialInternalID = new ProductInternalID()
-            //                {
-            //                    Value = "EPKLEC0034"
-            //                },
-            //                OwnerPartyInternalID = new PartyInternalID()
-            //                {
-            //                    Value = "AT"
-            //                },
-            //                InventoryRestrictedUseIndicator = true,
-            //                InventoryStockStatusCode = InventoryStockStatusCode.Item1,
-            //                SourceLogisticsAreaID = "CS01",
-            //                TargetLogisticsAreaID = "CS02",
-            //                InventoryItemChangeQuantity = new GoodsAndActivityConfirmationInventoryChangeInventoryChangeItemInventoryItemChangeQuantity()
-            //                {
-            //                    Quantity = new Quantity()
-            //                    {
-            //                        unitCode = "EA",
-            //                        Value = 1
-            //                    },
-            //                    QuantityTypeCode = new QuantityTypeCode()
-            //                    {
-            //                        Value = "EA"
-            //                    }
-            //                }
-            //            }
-            //        ]
-            //    }
-            //};
             var response = await client.DoGoodsMovementGoodsAndActivityConfirmationAsync(request.payload);
             _logger.LogInformation("api: {actionName}, response: {response}", ControllerContext.ActionDescriptor.ActionName, JsonConvert.SerializeObject(response));
 
