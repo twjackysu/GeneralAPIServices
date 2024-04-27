@@ -17,6 +17,7 @@ builder.Services.AddScoped<IMyResponseFactory, MyResponseFactory>();
 builder.Services.AddOptions().Configure<Settings>(builder.Configuration.GetSection("Settings"));
 var app = builder.Build();
 
+app.UseMiddleware<ExceptionMiddleware>();
 app.UseMiddleware<ValidateHeaderMiddleware>();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
