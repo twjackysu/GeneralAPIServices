@@ -1,8 +1,6 @@
 ﻿using DotnetSdkUtilities.Factory.ResponseFactory;
 using InventoryProcessingGoodsAndActivityConfirmationGoodsMovementInNS;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using SAP_API.Common;
@@ -10,7 +8,6 @@ using SAP_API.Configuration;
 using SAP_API.DTO.Request;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
-using System.Text;
 
 namespace SAP_API.Controllers
 {
@@ -35,9 +32,9 @@ namespace SAP_API.Controllers
         /// <remarks>
         /// Sample request:
         ///
-        ///     POST /InternalLogisticsMaterialMovement
+        ///     POST /api/InventoryProcessingGoodsAndActivityConfirmationGoodsMovementIn/InternalLogisticsMaterialMovement
         ///     {
-        ///        "payload": [
+        ///        "Payload": [
         ///           {
         ///              "ExternalID": {
         ///                 "Value": "EXT20240401"
@@ -71,38 +68,42 @@ namespace SAP_API.Controllers
         ///                 }
         ///              ]
         ///           }
-        ///        ]
+        ///        ],
+        ///        "User": "Allen"
         ///     }
         /// </remarks>
-        [ProducesResponseType(typeof(ApiOkResponse<string>), 200)]
+        [ProducesResponseType(typeof(ApiOkResponse<GACDetails[]>), 200)]
+        [ProducesResponseType(typeof(ApiErrorResponse<ErrorCodes>), 400)]
+        [ProducesResponseType(typeof(ApiErrorResponse<ErrorCodes>), 500)]
         [Produces("application/json")]
         [HttpPost]
         public async Task<IActionResult> InternalLogisticsMaterialMovement([FromBody] InternalLogisticsMaterialMovementRequest request, [FromHeader(Name = "Guru-BPM-Key")] string _)
         {
             var endpointAddress = new EndpointAddress(_setting.CurrentValue.SAP.EndPoints.InventoryProcessingGoodsAndActivityConfirmationGoodsMovementIn);
 
-            CustomBinding binding = new CustomBinding();
-            binding.Elements.Add(new MtomMessageEncodingBindingElement());
-            binding.Elements.Add(new HttpsTransportBindingElement
-            {
-                AuthenticationScheme = System.Net.AuthenticationSchemes.Basic
-            });
+            var binding = new CustomBinding(
+                new MtomMessageEncodingBindingElement(), 
+                new HttpsTransportBindingElement
+                {
+                    AuthenticationScheme = System.Net.AuthenticationSchemes.Basic
+                });
 
-            var https = new HttpsTransportBindingElement();
-            _logger.LogInformation("api: {actionName}, request: {request}", ControllerContext.ActionDescriptor.ActionName, JsonConvert.SerializeObject(request));
+            _logger.LogInformation("api: {actionName}, user: {user}, request: {request}", ControllerContext.ActionDescriptor.ActionName, request.User, JsonConvert.SerializeObject(request));
             var client = new InventoryProcessingGoodsAndActivityConfirmationGoodsMovementInClient(binding, endpointAddress);
             client.ClientCredentials.UserName.UserName = _setting.CurrentValue.SAP.ClientCredentials.UserName;
             client.ClientCredentials.UserName.Password = _setting.CurrentValue.SAP.ClientCredentials.Password;
 
-            var response = await client.DoGoodsMovementGoodsAndActivityConfirmationAsync(request.payload);
-            _logger.LogInformation("api: {actionName}, response: {response}", ControllerContext.ActionDescriptor.ActionName, JsonConvert.SerializeObject(response));
+            var response = await client.DoGoodsMovementGoodsAndActivityConfirmationAsync(request.Payload);
 
-            if(response.GoodsAndActivityConfoirmationGoodsMovementResponse?.GACDetails == null)
+            _logger.LogInformation("api: {actionName}, user: {user}, response: {response}", ControllerContext.ActionDescriptor.ActionName, request.User, JsonConvert.SerializeObject(response));
+            if (response.GoodsAndActivityConfoirmationGoodsMovementResponse?.GACDetails == null)
             {
-                return _myResponseFactory.CreateErrorResponse(ErrorCodes.BadRequestInvalidData, JsonConvert.SerializeObject(response.GoodsAndActivityConfoirmationGoodsMovementResponse?.Log));
+                return _myResponseFactory.CreateErrorResponse(ErrorCodes.BadRequestInvalidData, JsonConvert.SerializeObject(response.GoodsAndActivityConfoirmationGoodsMovementResponse?.Log.Item.Select(x => x.Note)));
             }
-
-            return _myResponseFactory.CreateOKResponse(response);
+            else
+            {
+                return _myResponseFactory.CreateOKResponse(response.GoodsAndActivityConfoirmationGoodsMovementResponse.GACDetails);
+            }
         }
     }
 }
