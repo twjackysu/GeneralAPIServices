@@ -3,13 +3,11 @@ using ManagePurchaseRequestInNS;
 
 namespace SAP_WSDL_Library.Connected_Services.ManagePurchaseRequestInNS
 {
-    internal class Sample
+    public class Sample
     {
-        public Sample()
+        public static PurchaseRequestMessageManuallyCreate GeneralInventoryPurchaseRequestSample = new PurchaseRequestMessageManuallyCreate()
         {
-            var GeneralInventoryPurchaseRequestSample = new PurchaseRequestMessageManuallyCreate()
-            {
-                PurchaseRequestMaintainBundle =
+            PurchaseRequestMaintainBundle =
                 [
                     new ManuallyPurchaseRequest()
                     {
@@ -83,11 +81,10 @@ namespace SAP_WSDL_Library.Connected_Services.ManagePurchaseRequestInNS
                         PURCREQUNIT = "AT-CS00",
                     }
                 ]
-            };
-
-            var ProjectThirdPartyPurchaseRequestSample = new PurchaseRequestMessageManuallyCreate()
-            {
-                PurchaseRequestMaintainBundle =
+        };
+        public static PurchaseRequestMessageManuallyCreate ProjectThirdPartyPurchaseRequestSample = new PurchaseRequestMessageManuallyCreate()
+        {
+            PurchaseRequestMaintainBundle =
                 [
                     new ManuallyPurchaseRequest()
                     {
@@ -228,7 +225,6 @@ namespace SAP_WSDL_Library.Connected_Services.ManagePurchaseRequestInNS
                         }
                     }
                 ]
-            };
-        }
+        };
     }
 }
