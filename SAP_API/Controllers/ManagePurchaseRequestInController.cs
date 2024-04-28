@@ -181,7 +181,7 @@ namespace SAP_API.Controllers
         [ProducesResponseType(typeof(ApiErrorResponse<ErrorCodes>), 500)]
         [Produces("application/json")]
         [HttpPost]
-        public async Task<IActionResult> ProjectThirdPartyPurchaseRequest([FromBody] ProjectThirdPartySupplierInvoiceRequestRequest request, [FromHeader(Name = "Guru-BPM-Key")] string _)
+        public async Task<IActionResult> ProjectThirdPartyPurchaseRequest([FromBody] ProjectThirdPartyPurchaseRequest request, [FromHeader(Name = "Guru-BPM-Key")] string _)
         {
             var endpointAddress = new EndpointAddress(_setting.CurrentValue.SAP.EndPoints.ManagePurchaseRequestIn);
 
