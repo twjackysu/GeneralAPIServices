@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using SAP_API.Common;
 using SAP_API.Configuration;
 using SAP_API.DTO.Request;
+using SAP_WSDL_Library.Connected_Services.ManageGoodsAndServiceAcknowledgementInboundNS;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 
@@ -29,6 +30,111 @@ namespace SAP_API.Controllers
         /// <summary>
         /// 商品和服務確認-專案第三方
         /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     POST /api/ManageGoodsAndServiceAcknowledgementInbound/ProjectThirdPartyGoodsAndServiceAcknowledgement
+        ///     {
+        ///        "Payload": {
+        ///           "GoodsAndServiceAcknowledgement": [
+        ///              {
+        ///                 "actionCode": 0,
+        ///                 "actionCodeSpecified": true,
+        ///                 "BusinessTransactionDocumentTypeCode": {
+        ///                    "Value": "282"
+        ///                 },
+        ///                 "Date": "2024-04-10",
+        ///                 "PostGSAIndicator": true,
+        ///                 "PostGSAIndicatorSpecified": true,
+        ///                 "DeliveryNoteReference": {
+        ///                    "actionCode": 0,
+        ///                    "actionCodeSpecified": true,
+        ///                    "ID": {
+        ///                       "Value": "ALICE_APITEST_004"
+        ///                    }
+        ///                 },
+        ///                 "Item": [
+        ///                    {
+        ///                       "actionCode": 0,
+        ///                       "actionCodeSpecified": true,
+        ///                       "BusinessTransactionDocumentTypeCode": {
+        ///                          "Value": "18"
+        ///                       },
+        ///                       "Quantity": {
+        ///                          "Value": 5
+        ///                       },
+        ///                       "QuantityTypeCode": {
+        ///                          "Value": "EA"
+        ///                       },
+        ///                       "CustomerParty": {
+        ///                          "PartyKey": {
+        ///                             "PartyID": {
+        ///                                "Value": "E076"
+        ///                             }
+        ///                          },
+        ///                          "actionCode": 0,
+        ///                          "actionCodeSpecified": true
+        ///                       },
+        ///                       "DeliveryPeriod": {
+        ///                          "StartDateTime": {
+        ///                             "timeZoneCode": "UTC+8",
+        ///                             "Value": "2024-04-09T17:00:00+08:00"
+        ///                          },
+        ///                          "EndDateTime": {
+        ///                             "timeZoneCode": "UTC+8",
+        ///                             "Value": "2024-04-16T02:00:00+08:00"
+        ///                          }
+        ///                       },
+        ///                       "ItemAccountingCodingBlockDistribution": {
+        ///                          "CompanyID": "AT",
+        ///                          "ActionCode": 0,
+        ///                          "ActionCodeSpecified": true,
+        ///                          "AccountingCodingBlockAssignment": [
+        ///                             {
+        ///                                "ActionCode": 0,
+        ///                                "ActionCodeSpecified": true,
+        ///                                "AccountingCodingBlockTypeCode": {
+        ///                                   "Value": "PRO"
+        ///                                },
+        ///                                "ProjectTaskKey": {
+        ///                                   "TaskID": {
+        ///                                      "Value": "AIN22032-B2-1"
+        ///                                   }
+        ///                                },
+        ///                                "SalesOrderReference": {
+        ///                                   "ID": {
+        ///                                      "Value": "339"
+        ///                                   },
+        ///                                   "ItemID": "10"
+        ///                                },
+        ///                                "EmployeeID": {
+        ///                                   "Value": "E999916"
+        ///                                }
+        ///                             }
+        ///                          ]
+        ///                       },
+        ///                       "PurchaseOrderReference": {
+        ///                          "ActionCode": 0,
+        ///                          "ActionCodeSpecified": true,
+        ///                          "BusinessTransactionDocumentReference": {
+        ///                             "ID": {
+        ///                                "Value": "2888"
+        ///                             },
+        ///                             "TypeCode": {
+        ///                                "Value": "001"
+        ///                             },
+        ///                             "ItemID": "1",
+        ///                             "ItemTypeCode": "18"
+        ///                          }
+        ///                       }
+        ///                    }
+        ///                 ]
+        ///              }
+        ///           ]
+        ///        },
+        ///        "User": "Tina"
+        ///     }
+        /// </remarks>
         [ProducesResponseType(typeof(ApiOkResponse<GSAMaintainConfirmationBundle[]>), 200)]
         [ProducesResponseType(typeof(ApiErrorResponse<ErrorCodes>), 400)]
         [ProducesResponseType(typeof(ApiErrorResponse<ErrorCodes>), 500)]

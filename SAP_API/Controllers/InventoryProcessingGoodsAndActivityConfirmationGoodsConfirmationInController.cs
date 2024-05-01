@@ -29,6 +29,11 @@ namespace SAP_API.Controllers
         /// <summary>
         /// 內部後勤-專案耗用
         /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     POST /api/InventoryProcessingGoodsAndActivityConfirmationGoodsConfirmationIn/InternalLogisticsProjectConsumption
+        /// </remarks>
         [ProducesResponseType(typeof(ApiOkResponse<GACDetails[]>), 200)]
         [ProducesResponseType(typeof(ApiErrorResponse<ErrorCodes>), 400)]
         [ProducesResponseType(typeof(ApiErrorResponse<ErrorCodes>), 500)]

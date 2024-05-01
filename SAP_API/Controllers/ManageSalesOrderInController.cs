@@ -31,6 +31,11 @@ namespace SAP_API.Controllers
         /// <summary>
         /// 銷售訂單-物料
         /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     POST /api/ManageSalesOrderIn/MaterialSalesOrder
+        /// </remarks>
         [ProducesResponseType(typeof(ApiOkResponse<SalesOrderMaintainConfirmationBundle[]>), 200)]
         [ProducesResponseType(typeof(ApiErrorResponse<ErrorCodes>), 400)]
         [ProducesResponseType(typeof(ApiErrorResponse<ErrorCodes>), 500)]
@@ -67,6 +72,11 @@ namespace SAP_API.Controllers
         /// <summary>
         /// 銷售訂單-專案
         /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     POST /api/ManageSalesOrderIn/ProjectSalesOrder
+        /// </remarks>
         [ProducesResponseType(typeof(ApiOkResponse<SalesOrderMaintainConfirmationBundle[]>), 200)]
         [ProducesResponseType(typeof(ApiErrorResponse<ErrorCodes>), 400)]
         [ProducesResponseType(typeof(ApiErrorResponse<ErrorCodes>), 500)]

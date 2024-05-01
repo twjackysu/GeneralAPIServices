@@ -29,6 +29,11 @@ namespace SAP_API.Controllers
         /// <summary>
         /// 供應商發票-專案第三方
         /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     POST /api/ManageSupplierInvoiceIn/ProjectThirdPartySupplierInvoice
+        /// </remarks>
         [ProducesResponseType(typeof(ApiOkResponse<SupplierInvoiceMaintainConfirmationBundle[]>), 200)]
         [ProducesResponseType(typeof(ApiErrorResponse<ErrorCodes>), 400)]
         [ProducesResponseType(typeof(ApiErrorResponse<ErrorCodes>), 500)]
