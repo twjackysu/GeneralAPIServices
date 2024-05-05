@@ -42,7 +42,8 @@ namespace SAP_API.Controllers
         ///              "SiteID": {
         ///                 "Value": "AT"
         ///              },
-        ///              "TransactionDateTimeSpecified": false,
+        ///              "TransactionDateTime": "2024-04-01T06:35:19+08:00",
+        ///              "TransactionDateTimeSpecified": true,
         ///              "InventoryChangeItemGoodsMovement": [
         ///                 {
         ///                    "ExternalItemID": "10",
@@ -53,7 +54,7 @@ namespace SAP_API.Controllers
         ///                       "Value": "AT"
         ///                    },
         ///                    "InventoryRestrictedUseIndicator": true,
-        ///                    "InventoryStockStatusCodeSpecified": false,
+        ///                    "InventoryStockStatusCode": 0,
         ///                    "SourceLogisticsAreaID": "CS01",
         ///                    "TargetLogisticsAreaID": "CS02",
         ///                    "InventoryItemChangeQuantity": {
