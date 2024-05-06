@@ -6,10 +6,8 @@ using Newtonsoft.Json;
 using SAP_API.Common;
 using SAP_API.Configuration;
 using SAP_API.DTO.Request;
-using SAP_WSDL_Library.Connected_Services.ManageSupplierInvoiceInNS;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
-using System.Text;
 
 namespace SAP_API.Controllers
 {

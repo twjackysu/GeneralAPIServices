@@ -6,7 +6,6 @@ using Newtonsoft.Json;
 using SAP_API.Common;
 using SAP_API.Configuration;
 using SAP_API.DTO.Request;
-using SAP_WSDL_Library.Connected_Services.ManageGoodsAndServiceAcknowledgementInboundNS;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 

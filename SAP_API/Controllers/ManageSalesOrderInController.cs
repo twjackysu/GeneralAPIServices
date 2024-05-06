@@ -1,16 +1,14 @@
 ﻿using DotnetSdkUtilities.Factory.ResponseFactory;
-using ManageSupplierInvoiceInNS;
-using Microsoft.AspNetCore.Http;
+using ManageSalesOrderInNS;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using SAP_API.Common;
 using SAP_API.Configuration;
 using SAP_API.DTO.Request;
-using System.ServiceModel.Channels;
-using System.ServiceModel;
-using ManageSalesOrderInNS;
 using SAP_WSDL_Library.Connected_Services.ManageSalesOrderInNS;
+using System.ServiceModel;
+using System.ServiceModel.Channels;
 
 namespace SAP_API.Controllers
 {
@@ -171,6 +169,128 @@ namespace SAP_API.Controllers
         /// Sample request:
         ///
         ///     POST /api/ManageSalesOrderIn/ProjectSalesOrder
+        ///     {
+        ///        "Payload": {
+        ///           "SalesOrder": [
+        ///              {
+        ///                 "ObjectNodeSenderTechnicalID": "S1",
+        ///                 "BuyerID": {
+        ///                    "Value": "ACS112162"
+        ///                 },
+        ///                 "Name": {
+        ///                    "languageCode": "ZF",
+        ///                    "Value": "ACS112162 洲美機電-台大癌醫及質子中心高低壓測試支援"
+        ///                 },
+        ///                 "DataOriginTypeCode": "5",
+        ///                 "ReleaseAllItemsToExecution": true,
+        ///                 "ReleaseAllItemsToExecutionSpecified": true,
+        ///                 "FinishFulfilmentProcessingOfAllItems": true,
+        ///                 "FinishFulfilmentProcessingOfAllItemsSpecified": true,
+        ///                 "AccountParty": {
+        ///                    "PartyID": {
+        ///                       "Value": "D178"
+        ///                    },
+        ///                    "actionCode": 3,
+        ///                    "actionCodeSpecified": true
+        ///                 },
+        ///                 "EmployeeResponsibleParty": {
+        ///                    "PartyID": {
+        ///                       "Value": "8000000169"
+        ///                    },
+        ///                 },
+        ///                 "SalesUnitParty": {
+        ///                    "PartyID": {
+        ///                       "Value": "CS20"
+        ///                    },
+        ///                    "actionCode": 3,
+        ///                    "actionCodeSpecified": true
+        ///                 },
+        ///                 "PricingTerms": {
+        ///                    "CurrencyCode": "TWD",
+        ///                    "PriceDateTime": {
+        ///                       "timeZoneCode": "UTC+8",
+        ///                       "Value": "2024-03-30T18:58:00+08:00"
+        ///                    },
+        ///                    "GrossAmountIndicator": false,
+        ///                    "actionCode": 3,
+        ///                    "actionCodeSpecified": true
+        ///                 },
+        ///                 "Item": [
+        ///                    {
+        ///                       "ID": "10",
+        ///                       "ProcessingTypeCode": "TPFP",
+        ///                       "ItemProduct": {
+        ///                          "ProductInternalID": {
+        ///                             "Value": "RMPJPJ0001"
+        ///                          },
+        ///                          "actionCode": 3,
+        ///                          "actionCodeSpecified": true,
+        ///                       },
+        ///                       "ItemServiceTerms": {
+        ///                          "ProjectTaskID": {
+        ///                             "Value": "ACS112162"
+        ///                          },
+        ///                       },
+        ///                       "ItemScheduleLine": [
+        ///                          {
+        ///                             "ID": "1",
+        ///                             "TypeCode": "1",
+        ///                             "Quantity": {
+        ///                                "unitCode": "LS",
+        ///                                "Value": 1
+        ///                             },
+        ///                             "actionCode": 3,
+        ///                             "actionCodeSpecified": true
+        ///                          }
+        ///                       ],
+        ///                       "PriceAndTaxCalculationItem": {
+        ///                          "ItemMainPrice": {
+        ///                             "Rate": {
+        ///                                "DecimalValue": 60000,
+        ///                                "CurrencyCode": "TWD",
+        ///                                "BaseDecimalValue": 1,
+        ///                                "BaseMeasureUnitCode": "LS"
+        ///                             },
+        ///                             "actionCode": 3,
+        ///                             "actionCodeSpecified": true
+        ///                          },
+        ///                          "ItemPriceComponent": [
+        ///                             {
+        ///                                "TypeCode": {
+        ///                                   "listID": "2",
+        ///                                   "Value": "0009"
+        ///                                },
+        ///                                "Description": {
+        ///                                   "languageCode": "EN",
+        ///                                   "Value": "Cost Estimate"
+        ///                                },
+        ///                                "Rate": {
+        ///                                   "DecimalValue": 32000,
+        ///                                   "CurrencyCode": "TWD",
+        ///                                   "BaseDecimalValue": 1,
+        ///                                   "BaseMeasureUnitCode": "LS"
+        ///                                },
+        ///                                "RateBaseQuantityTypeCode": {
+        ///                                   "Value": "LS"
+        ///                                },
+        ///                                "actionCode": 3,
+        ///                                "actionCodeSpecified": true
+        ///                             }
+        ///                          ],
+        ///                          "actionCode": 3,
+        ///                          "actionCodeSpecified": true
+        ///                       },
+        ///                    }
+        ///                 ],
+        ///                 "SendConfirmationIndicator": true,
+        ///                 "SendConfirmationIndicatorSpecified": true,
+        ///                 "actionCode": 0,
+        ///                 "actionCodeSpecified": true
+        ///              }
+        ///           ]
+        ///        },
+        ///        "User": "string"
+        ///     }
         /// </remarks>
         [ProducesResponseType(typeof(ApiOkResponse<SalesOrderMaintainConfirmationBundle[]>), 200)]
         [ProducesResponseType(typeof(ApiErrorResponse<ErrorCodes>), 400)]
@@ -192,7 +312,7 @@ namespace SAP_API.Controllers
             var client = new ManageSalesOrderInClient(binding, endpointAddress);
             client.ClientCredentials.UserName.UserName = _setting.CurrentValue.SAP.ClientCredentials.UserName;
             client.ClientCredentials.UserName.Password = _setting.CurrentValue.SAP.ClientCredentials.Password;
-
+            var temp = Sample.ProjectSalesOrder;
             var response = await client.MaintainBundleAsync(request.Payload);
 
             _logger.LogInformation("api: {actionName}, user: {user}, response: {response}", ControllerContext.ActionDescriptor.ActionName, request.User, JsonConvert.SerializeObject(response));

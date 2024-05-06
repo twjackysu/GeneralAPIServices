@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using SAP_API.Common;
 using SAP_API.Configuration;
 using SAP_API.DTO.Request;
+using SAP_WSDL_Library.Connected_Services.InventoryProcessingGoodsAndActivityConfirmationGoodsConfirmationInNS;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 
@@ -33,6 +34,61 @@ namespace SAP_API.Controllers
         /// Sample request:
         ///
         ///     POST /api/InventoryProcessingGoodsAndActivityConfirmationGoodsConfirmationIn/InternalLogisticsProjectConsumption
+        ///     {
+        ///        "Payload": [
+        ///           {
+        ///              "ExternalID": {
+        ///                 "Value": "PJ001"
+        ///              },
+        ///              "SiteID": {
+        ///                 "Value": "AT"
+        ///              },
+        ///              "TransactionDateTime": "2024-04-01T14:35:19.457648+08:00",
+        ///              "TransactionDateTimeSpecified": true,
+        ///              "InventoryMovementDirectionCode": "1",
+        ///              "ProjectTaskKey": {
+        ///                 "TaskID": {
+        ///                    "Value": "AIN21051-Z12"
+        ///                 }
+        ///              },
+        ///              "InventoryChangeItemGoodsConsumptionInformationForProject": [
+        ///                 {
+        ///                    "ExternalItemID": "PJ001",
+        ///                    "MaterialInternalID": {
+        ///                       "Value": "EPKLEC0034"
+        ///                    },
+        ///                    "OwnerPartyInternalID": {
+        ///                       "Value": "AT"
+        ///                    },
+        ///                    "LogisticsAreaID": "CS02",
+        ///                    "InventoryItemChangeQuantity": {
+        ///                       "Quantity": {
+        ///                          "unitCode": "EA",
+        ///                          "Value": 1
+        ///                       },
+        ///                       "QuantityTypeCode": {
+        ///                          "Value": "EA"
+        ///                       }
+        ///                    },
+        ///                    "AccountingCodingBlock": {
+        ///                       "AccountingCodingBlockTypeCode": {
+        ///                          "Value": "PRO"
+        ///                       },
+        ///                       "GeneralLedgerAccountAliasCode": {
+        ///                          "Value": "false"
+        ///                       },
+        ///                       "ProjectReference": {
+        ///                          "ProjectID": {
+        ///                             "Value": "AIN21051"
+        ///                          }
+        ///                       }
+        ///                    }
+        ///                 }
+        ///              ]
+        ///           }
+        ///        ],
+        ///        "User": "string"
+        ///     }
         /// </remarks>
         [ProducesResponseType(typeof(ApiOkResponse<GACDetails[]>), 200)]
         [ProducesResponseType(typeof(ApiErrorResponse<ErrorCodes>), 400)]
