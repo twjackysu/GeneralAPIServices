@@ -32,12 +32,12 @@ namespace SAP_API.Middlewares
                 await _next(context);
                 return;
             }
-            if (!context.Request.Headers.TryGetValue("Guru-BPM-Key", out var headerValue))
+            if (!context.Request.Headers.TryGetValue("SAP-API-Key", out var headerValue))
             {
 
                 context.Response.ContentType = "application/json";
                 context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                var message = "Header Guru-BPM-Key is missing.";
+                var message = "Header SAP-API-Key is missing.";
                 var response = factory?.CreateErrorResponse(ErrorCodes.BadRequestKeyNotFound, message);
 
                 _logger.LogWarning(message);

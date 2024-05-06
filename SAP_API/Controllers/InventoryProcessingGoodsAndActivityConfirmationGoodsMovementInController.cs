@@ -78,7 +78,7 @@ namespace SAP_API.Controllers
         [ProducesResponseType(typeof(ApiErrorResponse<ErrorCodes>), 500)]
         [Produces("application/json")]
         [HttpPost]
-        public async Task<IActionResult> InternalLogisticsMaterialMovement([FromBody] InternalLogisticsMaterialMovementRequest request, [FromHeader(Name = "Guru-BPM-Key")] string _)
+        public async Task<IActionResult> InternalLogisticsMaterialMovement([FromBody] InternalLogisticsMaterialMovementRequest request, [FromHeader(Name = "SAP-API-Key")] string _)
         {
             var endpointAddress = new EndpointAddress(_setting.CurrentValue.SAP.EndPoints.InventoryProcessingGoodsAndActivityConfirmationGoodsMovementIn);
 
