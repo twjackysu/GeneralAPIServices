@@ -1,4 +1,4 @@
-using DotnetSdkUtilities.Factory.ResponseFactory;
+ï»¿using DotnetSdkUtilities.Factory.ResponseFactory;
 using ManageSupplierInvoiceInNS;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -27,7 +27,7 @@ namespace SAP_API.Controllers
         }
 
         /// <summary>
-        /// ¨ÑÀ³°Óµo²¼-±M®×²Ä¤T¤è
+        /// ä¾›æ‡‰å•†ç™¼ç¥¨-å°ˆæ¡ˆç¬¬ä¸‰æ–¹
         /// </summary>
         /// <remarks>
         /// Sample request:
@@ -208,9 +208,9 @@ namespace SAP_API.Controllers
         ///                       "actionCodeSpecified": true
         ///                    }
         ///                 ],
-        ///                 "APnote": "³Ğ«ØªÌ³Æµù_ALICE",
-        ///                 "PRJ_NAM": "®×¥ó½s¸¹_ALICE_TEST01",
-        ///                 "PjName": "®×¥ó¦WºÙ_ALICE_TEST01",
+        ///                 "APnote": "å‰µå»ºè€…å‚™è¨»_ALICE",
+        ///                 "PRJ_NAM": "æ¡ˆä»¶ç·¨è™Ÿ_ALICE_TEST01",
+        ///                 "PjName": "æ¡ˆä»¶åç¨±_ALICE_TEST01",
         ///                 "REQUNIT": "MD30"
         ///              }
         ///           ]
