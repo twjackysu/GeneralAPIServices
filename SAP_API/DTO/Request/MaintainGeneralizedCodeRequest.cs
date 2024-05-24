@@ -16,4 +16,21 @@ namespace SAP_API.DTO.Request
         public required ReferenceParametersType ReferenceParameters { get; set; }
         public required ReplyToType ReplyTo { get; set; }
     }
+    public class MaintainGeneralizedCodeRequestHeaderSample
+    {
+        public static MaintainGeneralizedCodeRequestHeader Header = new()
+        {
+            Action = "?",
+            To = "QADERP",
+            MessageID = "?",
+            ReferenceParameters = new ReferenceParametersType()
+            {
+                suppressResponseDetail = false,
+            },
+            ReplyTo = new ReplyToType()
+            {
+                Address = "QADERP",
+            }
+        };
+    }
 }

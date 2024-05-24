@@ -1,14 +1,14 @@
 ﻿using DotnetSdkUtilities.Factory.ResponseFactory;
 using MaintainGeneralizedCodeNS;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
+using QAD_WSDL_Library.Connected_Services.MaintainGeneralizedCodeNS;
 using SAP_API.Common;
 using SAP_API.Configuration;
 using SAP_API.DTO.Request;
-using System.ServiceModel.Channels;
 using System.ServiceModel;
+using System.ServiceModel.Channels;
 
 namespace SAP_API.Controllers
 {
@@ -26,6 +26,52 @@ namespace SAP_API.Controllers
             _myResponseFactory = myResponseFactory;
             _setting = setting;
         }
+
+        /// <summary>
+        /// QAD MaintainGeneralizedCode
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     POST /api/MaintainGeneralizedCode/MaintainGeneralizedCode
+        ///     {
+        ///        "Payload": {
+        ///           "dsSessionContext": [
+        ///              {
+        ///                 "propertyQualifier": "QAD",
+        ///                 "propertyName": "Domain",
+        ///                 "propertyValue": "TAIWAY"
+        ///              },
+        ///              {
+        ///                 "propertyQualifier": "QAD",
+        ///                 "propertyName": "Version",
+        ///                 "propertyValue": "ERP3_1"
+        ///              }
+        ///           ],
+        ///           "dsGeneralizedCode": [
+        ///              {
+        ///                 "operation": null,
+        ///                 "codeFldname": "test",
+        ///                 "codeValue": "test",
+        ///                 "codeCmmt": "test0222",
+        ///                 "codeGroup": "APP"
+        ///              }
+        ///           ]
+        ///        },
+        ///        "Header": {
+        ///           "Action": "?",
+        ///           "To": "QADERP",
+        ///           "MessageID": "?",
+        ///           "ReferenceParameters": {
+        ///              "suppressResponseDetail": false
+        ///           },
+        ///           "ReplyTo": {
+        ///              "Address": "QADERP"
+        ///           }
+        ///        },
+        ///        "User": "Tank"
+        ///     }
+        /// </remarks>
         [ProducesResponseType(typeof(ApiOkResponse<processMaintainGeneralizedCodeResponse>), 200)]
         [ProducesResponseType(typeof(ApiErrorResponse<ErrorCodes>), 400)]
         [ProducesResponseType(typeof(ApiErrorResponse<ErrorCodes>), 500)]
@@ -41,6 +87,11 @@ namespace SAP_API.Controllers
                 {
                     AuthenticationScheme = System.Net.AuthenticationSchemes.Basic
                 });
+            request = new MaintainGeneralizedCodeRequest()
+            {
+                Header = MaintainGeneralizedCodeRequestHeaderSample.Header,
+                Payload = Sample.MaintainGeneralizedCodePayload,
+            };
 
             _logger.LogInformation("api: {actionName}, user: {user}, request: {request}", ControllerContext.ActionDescriptor.ActionName, request.User, JsonConvert.SerializeObject(request));
             var client = new QdocWebServiceClient(binding, endpointAddress);
