@@ -4,8 +4,9 @@
     {
         public required HashSet<string> ValidKeys { get; set; }
         public required SAP SAP { get; set; }
+        public required QAD QAD { get; set; }
     }
-    public class EndPoints
+    public class SAPEndPoints
     {
         public required string InventoryProcessingGoodsAndActivityConfirmationGoodsConfirmationIn { get; set; }
         public required string InventoryProcessingGoodsAndActivityConfirmationGoodsMovementIn { get; set; }
@@ -22,7 +23,15 @@
     }
     public class SAP
     {
-        public required EndPoints EndPoints { get; set; }
+        public required SAPEndPoints EndPoints { get; set; }
         public required ClientCredentials ClientCredentials { get; set; }
+    }
+    public class QAD
+    {
+        public required QADEndPoints EndPoints { get; set; }
+    }
+    public class QADEndPoints
+    {
+        public required string MaintainGeneralizedCode { get; set; }
     }
 }
