@@ -8,6 +8,7 @@
     }
     public class SAPEndPoints
     {
+        public required string CreateProjectPurchaseRequest { get; set; }
         public required string InventoryProcessingGoodsAndActivityConfirmationGoodsConfirmationIn { get; set; }
         public required string InventoryProcessingGoodsAndActivityConfirmationGoodsMovementIn { get; set; }
         public required string ManageGoodsAndServiceAcknowledgementInbound { get; set; }
