@@ -11000,6 +11000,8 @@ namespace ManagePurchaseOrderInNS
         
         private PurchaseOrderMaintainRequestBundleItemScheduleLine[] itemScheduleLineField;
         
+        private string purchaserequestSAPField;
+        
         private ProductTaxStandardClassificationCode hSNCodeIndiaCodeField;
         
         private bool itemImatListCompleteTransmissionIndicatorField;
@@ -11613,7 +11615,21 @@ namespace ManagePurchaseOrderInNS
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Namespace="http://sap.com/xi/AP/Globalization", Order=38)]
+        [System.Xml.Serialization.XmlElementAttribute(Namespace="http://sap.com/xi/AP/CustomerExtension/BYD/A0L22", Order=38)]
+        public string PurchaserequestSAP
+        {
+            get
+            {
+                return this.purchaserequestSAPField;
+            }
+            set
+            {
+                this.purchaserequestSAPField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Namespace="http://sap.com/xi/AP/Globalization", Order=39)]
         public ProductTaxStandardClassificationCode HSNCodeIndiaCode
         {
             get
@@ -17660,6 +17676,8 @@ namespace ManagePurchaseOrderInNS
         
         private PurchasingKitItemHierarchyRelationship kitHierarchyRelationshipField;
         
+        private string purchaserequestSAPField;
+        
         private ProductTaxStandardClassificationCode hSNCodeIndiaCodeField;
         
         /// <remarks/>
@@ -18349,7 +18367,21 @@ namespace ManagePurchaseOrderInNS
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=45)]
+        [System.Xml.Serialization.XmlElementAttribute(Namespace="http://sap.com/xi/AP/CustomerExtension/BYD/A0L22", Order=45)]
+        public string PurchaserequestSAP
+        {
+            get
+            {
+                return this.purchaserequestSAPField;
+            }
+            set
+            {
+                this.purchaserequestSAPField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=46)]
         public ProductTaxStandardClassificationCode HSNCodeIndiaCode
         {
             get
@@ -21138,6 +21170,8 @@ namespace ManagePurchaseOrderInNS
         
         private string budgetCategoryField;
         
+        private string purchaserequestSAPField;
+        
         private ProductTaxStandardClassificationCode hSNCodeIndiaCodeField;
         
         private bool itemImatListCompleteTransmissionIndicatorField;
@@ -21751,7 +21785,21 @@ namespace ManagePurchaseOrderInNS
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=40)]
+        [System.Xml.Serialization.XmlElementAttribute(Namespace="http://sap.com/xi/AP/CustomerExtension/BYD/A0L22", Order=40)]
+        public string PurchaserequestSAP
+        {
+            get
+            {
+                return this.purchaserequestSAPField;
+            }
+            set
+            {
+                this.purchaserequestSAPField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=41)]
         public ProductTaxStandardClassificationCode HSNCodeIndiaCode
         {
             get
