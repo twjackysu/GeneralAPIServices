@@ -38,12 +38,12 @@ namespace SAP_API.Controllers
         ///        "Payload": [
         ///           {
         ///              "ExternalID": {
-        ///                 "Value": "PJ001"
+        ///                 "Value": "PJ001-0527"
         ///              },
         ///              "SiteID": {
         ///                 "Value": "AT"
         ///              },
-        ///              "TransactionDateTime": "2024-04-01T14:35:19.457648+08:00",
+        ///              "TransactionDateTime": "2024-05-26T15:35:19.457648+08:00",
         ///              "TransactionDateTimeSpecified": true,
         ///              "InventoryMovementDirectionCode": "1",
         ///              "ProjectTaskKey": {
@@ -53,13 +53,14 @@ namespace SAP_API.Controllers
         ///              },
         ///              "InventoryChangeItemGoodsConsumptionInformationForProject": [
         ///                 {
-        ///                    "ExternalItemID": "PJ001",
+        ///                    "ExternalItemID": "PJ001-10",
         ///                    "MaterialInternalID": {
         ///                       "Value": "EPKLEC0034"
         ///                    },
         ///                    "OwnerPartyInternalID": {
         ///                       "Value": "AT"
         ///                    },
+        ///                    "InventoryRestrictedUseIndicator": false,
         ///                    "LogisticsAreaID": "CS02",
         ///                    "InventoryItemChangeQuantity": {
         ///                       "Quantity": {
@@ -74,20 +75,23 @@ namespace SAP_API.Controllers
         ///                       "AccountingCodingBlockTypeCode": {
         ///                          "Value": "PRO"
         ///                       },
-        ///                       "GeneralLedgerAccountAliasCode": {
-        ///                          "Value": "false"
-        ///                       },
         ///                       "ProjectReference": {
         ///                          "ProjectID": {
         ///                             "Value": "AIN21051"
         ///                          }
+        ///                       },
+        ///                       "SalesOrderReference": {
+        ///                          "ID": {
+        ///                             "Value": "538"
+        ///                          },
+        ///                          "ItemID": "10"
         ///                       }
         ///                    }
         ///                 }
         ///              ]
         ///           }
         ///        ],
-        ///        "User": "string"
+        ///        "User": "Andy"
         ///     }
         /// </remarks>
         [ProducesResponseType(typeof(ApiOkResponse<GACDetails[]>), 200)]
