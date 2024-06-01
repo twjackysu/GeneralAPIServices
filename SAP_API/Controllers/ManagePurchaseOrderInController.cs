@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using SAP_API.Common;
 using SAP_API.Configuration;
 using SAP_API.DTO.Request;
+using SAP_WSDL_Library.Connected_Services.ManagePurchaseOrderInNS;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 
@@ -34,199 +35,311 @@ namespace SAP_API.Controllers
         ///
         ///     POST /api/ManagePurchaseOrderIn/ProjectThirdPartyPurchaseOrder
         ///     {
-        ///        "Payload": {
-        ///           "PurchaseOrderMaintainBundle": [
-        ///              {
-        ///                 "actionCode": 0,
-        ///                 "actionCodeSpecified": true,
-        ///                 "ItemListCompleteTransmissionIndicator": true,
-        ///                 "ItemListCompleteTransmissionIndicatorSpecified": true,
-        ///                 "ObjectNodeSenderTechnicalID": "1",
-        ///                 "BusinessTransactionDocumentTypeCode": {
-        ///                    "Value": "001"
+        ///       "Payload": {
+        ///         "PurchaseOrderMaintainBundle": [
+        ///           {
+        ///             "ObjectNodeSenderTechnicalID": "1",
+        ///             "BusinessTransactionDocumentTypeCode": {
+        ///               "Value": "001"
+        ///             },
+        ///             "OrderPurchaseOrderActionIndicator": true,
+        ///             "OrderPurchaseOrderActionIndicatorSpecified": true,
+        ///             "FinishDeliveryPOActionIndicator": false,
+        ///             "FinishDeliveryPOActionIndicatorSpecified": true,
+        ///             "FinishInvoicePOActionIndicator": false,
+        ///             "FinishInvoicePOActionIndicatorSpecified": true,
+        ///             "CurrencyCode": "TWD",
+        ///             "BuyerParty": {
+        ///               "ObjectNodePartyTechnicalID": "2",
+        ///               "PartyKey": {
+        ///                 "PartyID": {
+        ///                   "Value": "AT"
+        ///                 }
+        ///               },
+        ///               "actionCode": 0,
+        ///               "actionCodeSpecified": true
+        ///             },
+        ///             "SellerParty": {
+        ///               "ObjectNodePartyTechnicalID": "3",
+        ///               "PartyKey": {
+        ///                 "PartyID": {
+        ///                   "Value": "B02009"
+        ///                 }
+        ///               },
+        ///               "actionCode": 0,
+        ///               "actionCodeSpecified": true
+        ///             },
+        ///             "EmployeeResponsibleParty": {
+        ///               "ObjectNodePartyTechnicalID": "4",
+        ///               "PartyKey": {
+        ///                 "PartyID": {
+        ///                   "Value": "E999916"
+        ///                 }
+        ///               },
+        ///               "actionCode": 0,
+        ///               "actionCodeSpecified": true
+        ///             },
+        ///             "ResponsiblePurchasingUnitParty": {
+        ///               "ObjectNodePartyTechnicalID": "5",
+        ///               "PartyKey": {
+        ///                 "PartyID": {
+        ///                   "Value": "MD30"
+        ///                 }
+        ///               },
+        ///               "actionCode": 0,
+        ///               "actionCodeSpecified": true
+        ///             },
+        ///             "AttachmentFolder": {
+        ///               "Document": [
+        ///                 {
+        ///                   "VisibleIndicator": true,
+        ///                   "VisibleIndicatorSpecified": true,
+        ///                   "CategoryCode": "3",
+        ///                   "TypeCode": {
+        ///                     "Value": "10001"
+        ///                   },
+        ///                   "Name": "BPM串接_NAME_240502",
+        ///                   "AlternativeName": "BPM串接表頭附件_Document Title文件標題_240502",
+        ///                   "Description": {
+        ///                     "languageCode": "ZF",
+        ///                     "Value": "BPM串接表頭附件_comment留言_240502"
+        ///                   },
+        ///                   "ExternalLinkWebURI": "",
+        ///                   "ActionCode": 0,
+        ///                   "ActionCodeSpecified": true
+        ///                 }
+        ///               ],
+        ///               "ActionCode": 0,
+        ///               "ActionCodeSpecified": true
+        ///             },
+        ///             "TextCollection": {
+        ///               "Text": [
+        ///                 {
+        ///                   "TypeCode": {
+        ///                     "Value": "10011"
+        ///                   },
+        ///                   "LanguageCode": "ZF",
+        ///                   "TextContent": {
+        ///                     "Text": {
+        ///                       "languageCode": "ZF",
+        ///                       "Value": "BPM串接表頭註記_描述明細_240502"
+        ///                     },
+        ///                     "ActionCode": 0,
+        ///                     "ActionCodeSpecified": true
+        ///                   },
+        ///                   "ActionCode": 0,
+        ///                   "ActionCodeSpecified": true
+        ///                 }
+        ///               ],
+        ///               "ActionCode": 0,
+        ///               "ActionCodeSpecified": true
+        ///             },
+        ///             "DeliveryTerms": {
+        ///               "IncoTerms": {
+        ///                 "ClassificationCode": "EXW",
+        ///                 "TransferLocationName": "TW"
+        ///               },
+        ///               "ActionCode": 0,
+        ///               "ActionCodeSpecified": true
+        ///             },
+        ///             "CashDiscountTerms": {
+        ///               "Code": {
+        ///                 "Value": "Z460"
+        ///               },
+        ///               "ActionCode": 0,
+        ///               "ActionCodeSpecified": true
+        ///             },
+        ///             "Item": [
+        ///               {
+        ///                 "ObjectNodeSenderTechnicalID": "6",
+        ///                 "ItemID": "1",
+        ///                 "BusinessTransactionDocumentItemTypeCode": "18",
+        ///                 "Quantity": {
+        ///                   "unitCode": "EA",
+        ///                   "Value": 6
         ///                 },
-        ///                 "CurrencyCode": "TWD",
-        ///                 "BuyerParty": {
-        ///                    "actionCode": 0,
-        ///                    "actionCodeSpecified": true,
-        ///                    "ObjectNodePartyTechnicalID": "2",
-        ///                    "PartyKey": {
-        ///                       "PartyID": {
-        ///                          "Value": "AT"
-        ///                       }
-        ///                    }
+        ///                 "ListUnitPrice": {
+        ///                   "Amount": {
+        ///                     "currencyCode": "TWD",
+        ///                     "Value": 51000
+        ///                   },
+        ///                   "BaseQuantity": {
+        ///                     "unitCode": "EA",
+        ///                     "Value": 1
+        ///                   },
+        ///                   "BaseQuantityTypeCode": {
+        ///                     "Value": "EA"
+        ///                   }
         ///                 },
-        ///                 "SellerParty": {
-        ///                    "actionCode": 0,
-        ///                    "actionCodeSpecified": true,
-        ///                    "ObjectNodePartyTechnicalID": "3",
-        ///                    "PartyKey": {
-        ///                       "PartyID": {
-        ///                          "Value": "B02009"
-        ///                       }
-        ///                    }
+        ///                 "DeliveryPeriod": {
+        ///                   "StartDateTime": {
+        ///                     "timeZoneCode": "UTC+8",
+        ///                     "Value": "2024-05-10T18:00:00+08:00"
+        ///                   }
         ///                 },
-        ///                 "EmployeeResponsibleParty": {
-        ///                    "actionCode": 0,
-        ///                    "actionCodeSpecified": true,
-        ///                    "ObjectNodePartyTechnicalID": "4",
-        ///                    "PartyKey": {
-        ///                       "PartyID": {
-        ///                          "Value": "E999914"
-        ///                       }
-        ///                    }
+        ///                 "ThirdPartyDealIndicator": true,
+        ///                 "ThirdPartyDealIndicatorSpecified": true,
+        ///                 "FollowUpDelivery": {
+        ///                   "RequirementCode": 2,
+        ///                   "RequirementCodeSpecified": true
         ///                 },
-        ///                 "ResponsiblePurchasingUnitParty": {
-        ///                    "actionCode": 0,
-        ///                    "actionCodeSpecified": true,
-        ///                    "ObjectNodePartyTechnicalID": "5",
-        ///                    "PartyKey": {
-        ///                       "PartyID": {
-        ///                          "Value": "MD30"
-        ///                       }
-        ///                    }
+        ///                 "FollowUpInvoice": {
+        ///                   "RequirementCode": 2,
+        ///                   "RequirementCodeSpecified": true
         ///                 },
-        ///                 "Item": [
-        ///                    {
-        ///                       "actionCode": 0,
-        ///                       "actionCodeSpecified": true,
-        ///                       "ObjectNodeSenderTechnicalID": "6",
-        ///                       "ItemID": "1",
-        ///                       "BusinessTransactionDocumentItemTypeCode": "18",
-        ///                       "Quantity": {
-        ///                          "unitCode": "EA",
-        ///                          "Value": 1
+        ///                 "ItemProduct": {
+        ///                   "CashDiscountDeductibleIndicator": false,
+        ///                   "ProductKey": {
+        ///                     "ProductTypeCode": "1",
+        ///                     "ProductIdentifierTypeCode": "1",
+        ///                     "ProductID": {
+        ///                       "Value": "PECNPR0001"
+        ///                     }
+        ///                   },
+        ///                   "actionCode": 0,
+        ///                   "actionCodeSpecified": true
+        ///                 },
+        ///                 "ShipToLocation": {
+        ///                   "ObjectNodePartyTechnicalID": "7",
+        ///                   "LocationID": {
+        ///                     "Value": "AT"
+        ///                   },
+        ///                   "actionCode": 0,
+        ///                   "actionCodeSpecified": true
+        ///                 },
+        ///                 "EndBuyerParty": {
+        ///                   "ObjectNodePartyTechnicalID": "10",
+        ///                   "PartyKey": {
+        ///                     "PartyTypeCode": {
+        ///                       "Value": "159"
+        ///                     },
+        ///                     "PartyID": {
+        ///                       "Value": "E001"
+        ///                     }
+        ///                   },
+        ///                   "actionCode": 0,
+        ///                   "actionCodeSpecified": true
+        ///                 },
+        ///                 "ProductRecipientParty": {
+        ///                   "ObjectNodePartyTechnicalID": "8",
+        ///                   "PartyKey": {
+        ///                     "PartyTypeCode": {
+        ///                       "Value": "147"
+        ///                     },
+        ///                     "PartyID": {
+        ///                       "Value": "E210802"
+        ///                     }
+        ///                   },
+        ///                   "actionCode": 0,
+        ///                   "actionCodeSpecified": true
+        ///                 },
+        ///                 "RequestorParty": {
+        ///                   "ObjectNodePartyTechnicalID": "9",
+        ///                   "PartyKey": {
+        ///                     "PartyTypeCode": {
+        ///                       "Value": "147"
+        ///                     },
+        ///                     "PartyID": {
+        ///                       "Value": "E210902"
+        ///                     }
+        ///                   },
+        ///                   "actionCode": 0,
+        ///                   "actionCodeSpecified": true
+        ///                 },
+        ///                 "ItemAccountingCodingBlockDistribution": {
+        ///                   "CompanyID": "AT",
+        ///                   "AccountingCodingBlockAssignment": [
+        ///                     {
+        ///                       "AccountingCodingBlockTypeCode": {
+        ///                         "Value": "PRO"
         ///                       },
+        ///                       "ProjectTaskKey": {
+        ///                         "TaskID": {
+        ///                           "Value": "AIN23013-E5"
+        ///                         }
+        ///                       },
+        ///                       "SalesOrderReference": {
+        ///                         "ID": {
+        ///                           "Value": "1601"
+        ///                         },
+        ///                         "ItemID": "10"
+        ///                       },
+        ///                       "ActionCode": 0,
+        ///                       "ActionCodeSpecified": true
+        ///                     }
+        ///                   ],
+        ///                   "ActionCode": 0,
+        ///                   "ActionCodeSpecified": true
+        ///                 },
+        ///                 "ItemAttachmentFolder": {
+        ///                   "Document": [
+        ///                     {
+        ///                       "VisibleIndicator": true,
+        ///                       "VisibleIndicatorSpecified": true,
+        ///                       "CategoryCode": "3",
+        ///                       "TypeCode": {
+        ///                         "Value": "10001"
+        ///                       },
+        ///                       "Name": "BPM串接_表身NAME_2400502",
+        ///                       "AlternativeName": "BPM串接表身附件_240502",
         ///                       "Description": {
-        ///                          "languageCode": "ZF",
-        ///                          "Value": "保護電驛/SEL-700G"
+        ///                         "languageCode": "ZF",
+        ///                         "Value": "BPM串接表身附件_comment留言_240502"
         ///                       },
-        ///                       "NetUnitPrice": {
-        ///                          "Amount": {
-        ///                             "currencyCode": "TWD",
-        ///                             "Value": 65000
-        ///                          },
-        ///                          "BaseQuantity": {
-        ///                             "unitCode": "EA",
-        ///                             "Value": 1
-        ///                          },
-        ///                          "BaseQuantityTypeCode": {
-        ///                             "Value": "EA"
-        ///                          }
+        ///                       "ExternalLinkWebURI": "",
+        ///                       "ActionCode": 0,
+        ///                       "ActionCodeSpecified": true
+        ///                     }
+        ///                   ],
+        ///                   "ActionCode": 0,
+        ///                   "ActionCodeSpecified": true
+        ///                 },
+        ///                 "ItemTextCollection": {
+        ///                   "Text": [
+        ///                     {
+        ///                       "TypeCode": {
+        ///                         "Value": "10011"
         ///                       },
-        ///                       "GrossUnitPrice": {
-        ///                          "Amount": {
-        ///                             "currencyCode": "TWD",
-        ///                             "Value": 68250
-        ///                          },
-        ///                          "BaseQuantity": {
-        ///                             "unitCode": "EA",
-        ///                             "Value": 1
-        ///                          },
-        ///                          "BaseQuantityTypeCode": {
-        ///                             "Value": "EA"
-        ///                          }
+        ///                       "LanguageCode": "ZF",
+        ///                       "TextContent": {
+        ///                         "Text": {
+        ///                           "languageCode": "ZF",
+        ///                           "Value": "BPM串接表身註記_描述明細_240502"
+        ///                         },
+        ///                         "ActionCode": 0,
+        ///                         "ActionCodeSpecified": true
         ///                       },
-        ///                       "ListUnitPrice": {
-        ///                          "Amount": {
-        ///                             "currencyCode": "TWD",
-        ///                             "Value": 65000
-        ///                          },
-        ///                          "BaseQuantity": {
-        ///                             "unitCode": "EA",
-        ///                             "Value": 1
-        ///                          },
-        ///                          "BaseQuantityTypeCode": {
-        ///                             "Value": "EA"
-        ///                          }
-        ///                       },
-        ///                       "DeliveryPeriod": {
-        ///                          "StartDateTime": {
-        ///                             "timeZoneCode": "UTC+8",
-        ///                             "Value": "2024-04-10T18:00:00+08:00"
-        ///                          },
-        ///                          "EndDateTime": {
-        ///                             "timeZoneCode": "UTC+8",
-        ///                             "Value": "2024-04-16T01:00:00+08:00"
-        ///                          }
-        ///                       },
-        ///                       "ThirdPartyDealIndicator": true,
-        ///                       "ThirdPartyDealIndicatorSpecified": true,
-        ///                       "FollowUpPurchaseOrderConfirmation": {
-        ///                          "RequirementCode": 4,
-        ///                          "RequirementCodeSpecified": true
-        ///                       },
-        ///                       "FollowUpDelivery": {
-        ///                          "RequirementCode": 2,
-        ///                          "RequirementCodeSpecified": true
-        ///                       },
-        ///                       "FollowUpInvoice": {
-        ///                          "RequirementCode": 2,
-        ///                          "RequirementCodeSpecified": true
-        ///                       },
-        ///                       "ItemProduct": {
-        ///                          "actionCode": 0,
-        ///                          "actionCodeSpecified": true,
-        ///                          "CashDiscountDeductibleIndicator": false,
-        ///                          "ProductKey": {
-        ///                             "ProductTypeCode": "1",
-        ///                             "ProductIdentifierTypeCode": "1",
-        ///                             "ProductID": {
-        ///                                "Value": "PECNPR0001"
-        ///                             }
-        ///                          }
-        ///                       },
-        ///                       "ItemTaxCalculation": {
-        ///                          "ObjectNodeSenderTechnicalID": "1",
-        ///                          "CountryCode": "TW",
-        ///                          "TaxationCharacteristicsCode": {
-        ///                             "listID": "TW",
-        ///                             "Value": "P21"
-        ///                          },
-        ///                          "actionCode": 0,
-        ///                          "actionCodeSpecified": true
-        ///                       },
-        ///                       "ItemAccountingCodingBlockDistribution": {
-        ///                          "CompanyID": "AT",
-        ///                          "ActionCode": 0,
-        ///                          "ActionCodeSpecified": true,
-        ///                          "AccountingCodingBlockAssignment": [
-        ///                             {
-        ///                                "ActionCode": 0,
-        ///                                "ActionCodeSpecified": true,
-        ///                                "AccountingCodingBlockTypeCode": {
-        ///                                   "Value": "PRD"
-        ///                                },
-        ///                                "ProjectTaskKey": {
-        ///                                   "TaskID": {
-        ///                                      "Value": "AIN23013-E5"
-        ///                                   }
-        ///                                },
-        ///                                "SalesOrderReference": {
-        ///                                   "ID": {
-        ///                                      "Value": "1601"
-        ///                                   },
-        ///                                   "ItemID": "10"
-        ///                                },
-        ///                                "SalesOrderName": {
-        ///                                   "languageCode": "ZF",
-        ///                                   "Value": "AIN23013"
-        ///                                },
-        ///                                "SalesOrderItemDescription": {
-        ///                                   "languageCode": "ZF",
-        ///                                   "Value": "TSMC F18P7 S2工程"
-        ///                                }
-        ///                             }
-        ///                          ]
-        ///                       }
-        ///                    }
-        ///                 ],
-        ///                 "PRJ_NAM": "AIN23013-E5 - SEL保護電驛_test",
-        ///                 "PjName": "AIN23013_test"
-        ///              }
-        ///           ]
-        ///        },
-        ///        "User": "Tony"
+        ///                       "ActionCode": 0,
+        ///                       "ActionCodeSpecified": true
+        ///                     }
+        ///                   ],
+        ///                   "ActionCode": 0,
+        ///                   "ActionCodeSpecified": true
+        ///                 },
+        ///                 "ItemTaxCalculation": {
+        ///                   "CountryCode": "TW",
+        ///                   "TaxationCharacteristicsCode": {
+        ///                     "listID": "TW",
+        ///                     "Value": "P21"
+        ///                   },
+        ///                   "actionCode": 0,
+        ///                   "actionCodeSpecified": true
+        ///                 },
+        ///                 "PurchaserequestSAP": "2144",
+        ///                 "actionCode": 0,
+        ///                 "actionCodeSpecified": true
+        ///               }
+        ///             ],
+        ///             "PRJ_NAM": "BPM_POTEST_0502接續商品收貨",
+        ///             "PjName": "BPM_POTEST_0502",
+        ///             "actionCode": 0,
+        ///             "actionCodeSpecified": true,
+        ///             "ItemListCompleteTransmissionIndicator": true,
+        ///             "ItemListCompleteTransmissionIndicatorSpecified": true
+        ///           }
+        ///         ]
+        ///       },
+        ///       "User": "Tony"
         ///     }
         /// </remarks>
         [ProducesResponseType(typeof(ApiOkResponse<PurchaseOrderMaintainConfirmationBundle[]>), 200)]
@@ -249,6 +362,7 @@ namespace SAP_API.Controllers
             var client = new ManagePurchaseOrderInClient(binding, endpointAddress);
             client.ClientCredentials.UserName.UserName = _setting.CurrentValue.SAP.ClientCredentials.UserName;
             client.ClientCredentials.UserName.Password = _setting.CurrentValue.SAP.ClientCredentials.Password;
+
             var response = await client.ManagePurchaseOrderInMaintainBundleAsync(request.Payload);
 
             _logger.LogInformation("api: {actionName}, user: {user}, response: {response}", ControllerContext.ActionDescriptor.ActionName, request.User, JsonConvert.SerializeObject(response));
