@@ -13,24 +13,22 @@ namespace SAP_API.Utilities
             {
                 Type sapType = _setting.CurrentValue.SAP.GetType();
 
+#pragma warning disable CS8600, CS8602, CS8619
                 PropertyInfo clientCredentialProperty = sapType.GetProperty(clientCredentialOption);
 
                 object clientCredentialValue = clientCredentialProperty.GetValue(_setting.CurrentValue.SAP);
-
                 Type clientCredentialType = clientCredentialValue.GetType();
 
                 PropertyInfo userNameProperty = clientCredentialType.GetProperty("UserName");
                 PropertyInfo passwordProperty = clientCredentialType.GetProperty("Password");
-
                 string userName = (string)userNameProperty.GetValue(clientCredentialValue);
                 string password = (string)passwordProperty.GetValue(clientCredentialValue);
 
                 return (userName, password);
             }
-            else
-            {
-                return (_setting.CurrentValue.SAP.ClientCredentials.UserName, _setting.CurrentValue.SAP.ClientCredentials.Password);
-            }
+#pragma warning restore CS8600, CS8602, CS8619
+
+            return (_setting.CurrentValue.SAP.ClientCredentials.UserName, _setting.CurrentValue.SAP.ClientCredentials.Password);
         }
     }
 }
