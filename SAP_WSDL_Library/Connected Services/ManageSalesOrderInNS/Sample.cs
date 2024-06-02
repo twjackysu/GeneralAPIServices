@@ -107,16 +107,13 @@ namespace SAP_WSDL_Library.Connected_Services.ManageSalesOrderInNS
                 {
                     actionCode = ActionCode.Item01,
                     actionCodeSpecified = true,
-                    ObjectNodeSenderTechnicalID = "S1",
-                    ReleaseAllItemsToExecution = true,
-                    ReleaseAllItemsToExecutionSpecified = true,
-                    FinishFulfilmentProcessingOfAllItems = true,
-                    FinishFulfilmentProcessingOfAllItemsSpecified = true,
                     DataOriginTypeCode = "5",
+                    PostingDate = Convert.ToDateTime("2024-05-03T02:00:10Z"),
                     Name = new EXTENDED_Name(){
-                        Value = "ACS112162 洲美機電-台大癌醫及質子中心高低壓測試支援",
+                        Value = "ACS112162_BPM串接測試",
                         languageCode = "ZF"
                     },
+
                     SalesUnitParty =  new SalesOrderMaintainRequestPartyIDParty(){
                         actionCode = ActionCode.Item04,
                         actionCodeSpecified = true,
@@ -125,7 +122,7 @@ namespace SAP_WSDL_Library.Connected_Services.ManageSalesOrderInNS
                         }
                     },
                     BuyerID = new BusinessTransactionDocumentID(){
-                        Value = "ACS112162"
+                        Value = "ACS112162_BPM050603"
                     },
                     AccountParty = new SalesOrderMaintainRequestPartyParty(){
                         actionCode = ActionCode.Item04,
@@ -136,17 +133,13 @@ namespace SAP_WSDL_Library.Connected_Services.ManageSalesOrderInNS
                     },
                     EmployeeResponsibleParty = new SalesOrderMaintainRequestPartyIDParty(){
                         PartyID = new PartyID(){
-                            Value = "8000000169"
+                            Value = "E999966"
                         }
                     },
                     PricingTerms = new SalesOrderMaintainRequestPricingTerms(){
                         actionCode = ActionCode.Item04,
                         actionCodeSpecified = true,
                         CurrencyCode = "TWD",
-                        PriceDateTime = new LOCALNORMALISED_DateTime1(){
-                            timeZoneCode = "UTC+8",
-                            Value = Convert.ToDateTime("2024-03-30T10:58:00Z")
-                        },
                         GrossAmountIndicator = false,
                     },
                     Item = [
@@ -180,11 +173,15 @@ namespace SAP_WSDL_Library.Connected_Services.ManageSalesOrderInNS
                             PriceAndTaxCalculationItem = new SalesOrderMaintainRequestPriceAndTaxCalculationItem(){
                                 actionCode = ActionCode.Item04,
                                 actionCodeSpecified = true,
+                                TaxationCharacteristicsCode = new ProductTaxationCharacteristicsCode(){
+                                    listID = "TW",
+                                    Value = "S351"
+                                },
                                 ItemMainPrice = new SalesOrderMaintainRequestPriceAndTaxCalculationItemItemMainPrice(){
                                     actionCode = ActionCode.Item04,
                                     actionCodeSpecified = true,
                                     Rate = new Rate(){
-                                        DecimalValue = 60000,
+                                        DecimalValue = 77300,
                                         CurrencyCode = "TWD",
                                         BaseDecimalValue = 1,
                                         BaseMeasureUnitCode = "LS"
@@ -203,7 +200,7 @@ namespace SAP_WSDL_Library.Connected_Services.ManageSalesOrderInNS
                                             languageCode = "EN"
                                         },
                                         Rate = new Rate(){
-                                            DecimalValue = 32000,
+                                            DecimalValue = 31300,
                                             CurrencyCode = "TWD",
                                             BaseDecimalValue = 1,
                                             BaseMeasureUnitCode = "LS"
@@ -216,8 +213,13 @@ namespace SAP_WSDL_Library.Connected_Services.ManageSalesOrderInNS
                             },
                         }
                     ],
-                    SendConfirmationIndicator = true,
-                    SendConfirmationIndicatorSpecified = true,
+                    CashDiscountTerms = new SalesOrderMaintainRequestCashDiscountTerms(){
+                        actionCode = ActionCode.Item04,
+                        actionCodeSpecified = true,
+                        Code = new CashDiscountTermsCode(){
+                            Value = "Z310"
+                        }
+                    },
                 }
             ]
         };

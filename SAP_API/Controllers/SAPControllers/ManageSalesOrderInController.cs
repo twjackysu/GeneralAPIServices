@@ -176,19 +176,14 @@ namespace SAP_API.Controllers.SAPControllers
         ///        "Payload": {
         ///           "SalesOrder": [
         ///              {
-        ///                 "ObjectNodeSenderTechnicalID": "S1",
         ///                 "BuyerID": {
-        ///                    "Value": "ACS112162"
+        ///                    "Value": "ACS112162_BPM050603"
         ///                 },
         ///                 "Name": {
         ///                    "languageCode": "ZF",
-        ///                    "Value": "ACS112162 洲美機電-台大癌醫及質子中心高低壓測試支援"
+        ///                    "Value": "ACS112162_BPM串接測試"
         ///                 },
         ///                 "DataOriginTypeCode": "5",
-        ///                 "ReleaseAllItemsToExecution": true,
-        ///                 "ReleaseAllItemsToExecutionSpecified": true,
-        ///                 "FinishFulfilmentProcessingOfAllItems": true,
-        ///                 "FinishFulfilmentProcessingOfAllItemsSpecified": true,
         ///                 "AccountParty": {
         ///                    "PartyID": {
         ///                       "Value": "D178"
@@ -198,8 +193,8 @@ namespace SAP_API.Controllers.SAPControllers
         ///                 },
         ///                 "EmployeeResponsibleParty": {
         ///                    "PartyID": {
-        ///                       "Value": "8000000169"
-        ///                    },
+        ///                       "Value": "E999966"
+        ///                    }
         ///                 },
         ///                 "SalesUnitParty": {
         ///                    "PartyID": {
@@ -210,10 +205,6 @@ namespace SAP_API.Controllers.SAPControllers
         ///                 },
         ///                 "PricingTerms": {
         ///                    "CurrencyCode": "TWD",
-        ///                    "PriceDateTime": {
-        ///                       "timeZoneCode": "UTC+8",
-        ///                       "Value": "2024-03-30T18:58:00+08:00"
-        ///                    },
         ///                    "GrossAmountIndicator": false,
         ///                    "actionCode": 3,
         ///                    "actionCodeSpecified": true
@@ -227,12 +218,12 @@ namespace SAP_API.Controllers.SAPControllers
         ///                             "Value": "RMPJPJ0001"
         ///                          },
         ///                          "actionCode": 3,
-        ///                          "actionCodeSpecified": true,
+        ///                          "actionCodeSpecified": true
         ///                       },
         ///                       "ItemServiceTerms": {
         ///                          "ProjectTaskID": {
         ///                             "Value": "ACS112162"
-        ///                          },
+        ///                          }
         ///                       },
         ///                       "ItemScheduleLine": [
         ///                          {
@@ -247,9 +238,13 @@ namespace SAP_API.Controllers.SAPControllers
         ///                          }
         ///                       ],
         ///                       "PriceAndTaxCalculationItem": {
+        ///                          "TaxationCharacteristicsCode": {
+        ///                             "listID": "TW",
+        ///                             "Value": "S351"
+        ///                          },
         ///                          "ItemMainPrice": {
         ///                             "Rate": {
-        ///                                "DecimalValue": 60000,
+        ///                                "DecimalValue": 77300,
         ///                                "CurrencyCode": "TWD",
         ///                                "BaseDecimalValue": 1,
         ///                                "BaseMeasureUnitCode": "LS"
@@ -268,7 +263,7 @@ namespace SAP_API.Controllers.SAPControllers
         ///                                   "Value": "Cost Estimate"
         ///                                },
         ///                                "Rate": {
-        ///                                   "DecimalValue": 32000,
+        ///                                   "DecimalValue": 31300,
         ///                                   "CurrencyCode": "TWD",
         ///                                   "BaseDecimalValue": 1,
         ///                                   "BaseMeasureUnitCode": "LS"
@@ -282,17 +277,22 @@ namespace SAP_API.Controllers.SAPControllers
         ///                          ],
         ///                          "actionCode": 3,
         ///                          "actionCodeSpecified": true
-        ///                       },
+        ///                       }
         ///                    }
         ///                 ],
-        ///                 "SendConfirmationIndicator": true,
-        ///                 "SendConfirmationIndicatorSpecified": true,
+        ///                 "CashDiscountTerms": {
+        ///                    "Code": {
+        ///                       "Value": "Z310"
+        ///                    },
+        ///                    "actionCode": 3,
+        ///                    "actionCodeSpecified": true
+        ///                 },
         ///                 "actionCode": 0,
         ///                 "actionCodeSpecified": true
         ///              }
         ///           ]
         ///        },
-        ///        "User": "string"
+        ///        "User": "Peter"
         ///     }
         /// </remarks>
         [ProducesResponseType(typeof(ApiOkResponse<SalesOrderMaintainConfirmationBundle[]>), 200)]
