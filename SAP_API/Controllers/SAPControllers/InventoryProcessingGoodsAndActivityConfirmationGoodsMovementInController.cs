@@ -38,30 +38,29 @@ namespace SAP_API.Controllers.SAPControllers
         ///        "Payload": [
         ///           {
         ///              "ExternalID": {
-        ///                 "Value": "EXT20240401"
+        ///                 "Value": "FANG_BPMTEST_01"
         ///              },
         ///              "SiteID": {
         ///                 "Value": "AT"
         ///              },
-        ///              "TransactionDateTime": "2024-04-01T06:35:19+08:00",
+        ///              "TransactionDateTime": "2024-05-26T06:35:19+08:00",
         ///              "TransactionDateTimeSpecified": true,
         ///              "InventoryChangeItemGoodsMovement": [
         ///                 {
-        ///                    "ExternalItemID": "10",
+        ///                    "ExternalItemID": "XXXXX-10",
         ///                    "MaterialInternalID": {
         ///                       "Value": "EPKLEC0034"
         ///                    },
         ///                    "OwnerPartyInternalID": {
         ///                       "Value": "AT"
         ///                    },
-        ///                    "InventoryRestrictedUseIndicator": true,
-        ///                    "InventoryStockStatusCode": 0,
+        ///                    "InventoryRestrictedUseIndicator": false,
         ///                    "SourceLogisticsAreaID": "CS01",
         ///                    "TargetLogisticsAreaID": "CS02",
         ///                    "InventoryItemChangeQuantity": {
         ///                       "Quantity": {
         ///                          "unitCode": "EA",
-        ///                          "Value": 1
+        ///                          "Value": 3
         ///                       },
         ///                       "QuantityTypeCode": {
         ///                          "Value": "EA"
