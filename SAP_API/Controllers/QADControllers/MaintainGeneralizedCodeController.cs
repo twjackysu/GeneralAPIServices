@@ -10,9 +10,9 @@ using SAP_API.DTO.Request;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 
-namespace SAP_API.Controllers
+namespace SAP_API.Controllers.QADControllers
 {
-    [Route("api/[controller]")]
+    [Route("api/QAD/[controller]/[action]")]
     [ApiController]
     public class MaintainGeneralizedCodeController : ControllerBase
     {
@@ -33,7 +33,7 @@ namespace SAP_API.Controllers
         /// <remarks>
         /// Sample request:
         ///
-        ///     POST /api/MaintainGeneralizedCode/MaintainGeneralizedCode
+        ///     POST /api/QAD/MaintainGeneralizedCode/MaintainGeneralizedCode
         ///     {
         ///        "Payload": {
         ///           "dsSessionContext": [
@@ -77,7 +77,7 @@ namespace SAP_API.Controllers
         [ProducesResponseType(typeof(ApiErrorResponse<ErrorCodes>), 500)]
         [Produces("application/json")]
         [HttpPost]
-        public async Task<IActionResult> MaintainGeneralizedCode([FromBody] MaintainGeneralizedCodeRequest request, [FromHeader(Name = "SAP-API-Key")] string _)
+        public async Task<IActionResult> MaintainGeneralizedCode([FromBody] MaintainGeneralizedCodeRequest request, [FromHeader(Name = "API-Key")] string _)
         {
             var endpointAddress = new EndpointAddress(_setting.CurrentValue.QAD.EndPoints.MaintainGeneralizedCode);
 

@@ -6,13 +6,15 @@ using Newtonsoft.Json;
 using SAP_API.Common;
 using SAP_API.Configuration;
 using SAP_API.DTO.Request;
+using SAP_API.Utilities;
 using SAP_WSDL_Library.Connected_Services.CreateProjectPurchaseRequestNS;
+using System.Reflection;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 
-namespace SAP_API.Controllers
+namespace SAP_API.Controllers.SAPControllers
 {
-    [Route("api/[controller]/[action]")]
+    [Route("api/SAP/[controller]/[action]")]
     [ApiController]
     public class CreateProjectPurchaseRequestController : ControllerBase
     {
@@ -33,7 +35,7 @@ namespace SAP_API.Controllers
         /// <remarks>
         /// Sample request:
         ///
-        ///     POST /api/ManagePurchaseRequestIn/ProjectThirdPartyPurchaseRequest
+        ///     POST /api/SAP/ManagePurchaseRequestIn/ProjectThirdPartyPurchaseRequest
         ///     {
         ///        "Payload": {
         ///           "ZProjectPurchaseRequestAPI": {
@@ -175,7 +177,7 @@ namespace SAP_API.Controllers
         [ProducesResponseType(typeof(ApiErrorResponse<ErrorCodes>), 500)]
         [Produces("application/json")]
         [HttpPost]
-        public async Task<IActionResult> ProjectThirdPartyPurchaseRequest([FromBody] ProjectThirdPartyPurchaseRequest request, [FromHeader(Name = "SAP-API-Key")] string _)
+        public async Task<IActionResult> ProjectThirdPartyPurchaseRequest([FromBody] ProjectThirdPartyPurchaseRequest request, [FromHeader(Name = "API-Key")] string _, [FromHeader(Name = "Client-Credential-Option")] string? clientCredentialOption)
         {
             var endpointAddress = new EndpointAddress(_setting.CurrentValue.SAP.EndPoints.CreateProjectPurchaseRequest);
 
@@ -188,8 +190,11 @@ namespace SAP_API.Controllers
             var json = JsonConvert.SerializeObject(Sample.ProjectThirdPartyPurchaseRequestSample);
             _logger.LogInformation("api: {actionName}, user: {user}, request: {request}", ControllerContext.ActionDescriptor.ActionName, request.User, JsonConvert.SerializeObject(request));
             var client = new YGQJ2RDPY_CustomCreateProjectPurchaseRequestClient(binding, endpointAddress);
-            client.ClientCredentials.UserName.UserName = _setting.CurrentValue.SAP.ClientCredentials.UserName;
-            client.ClientCredentials.UserName.Password = _setting.CurrentValue.SAP.ClientCredentials.Password;
+
+            var (userName, password) = CredentialHelper.GetCredentials(_setting, clientCredentialOption);
+
+            client.ClientCredentials.UserName.UserName = userName;
+            client.ClientCredentials.UserName.Password = password;
 
             var response = await client.CreateAsync(request.Payload);
 

@@ -6,13 +6,14 @@ using Newtonsoft.Json;
 using SAP_API.Common;
 using SAP_API.Configuration;
 using SAP_API.DTO.Request;
+using SAP_API.Utilities;
 using SAP_WSDL_Library.Connected_Services.ManageSalesOrderInNS;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 
-namespace SAP_API.Controllers
+namespace SAP_API.Controllers.SAPControllers
 {
-    [Route("api/[controller]/[action]")]
+    [Route("api/SAP/[controller]/[action]")]
     [ApiController]
     public class ManageSalesOrderInController : ControllerBase
     {
@@ -33,7 +34,7 @@ namespace SAP_API.Controllers
         /// <remarks>
         /// Sample request:
         ///
-        ///     POST /api/ManageSalesOrderIn/MaterialSalesOrder
+        ///     POST /api/SAP/ManageSalesOrderIn/MaterialSalesOrder
         ///     {
         ///        "Payload": {
         ///           "SalesOrder": [
@@ -134,7 +135,7 @@ namespace SAP_API.Controllers
         [ProducesResponseType(typeof(ApiErrorResponse<ErrorCodes>), 500)]
         [Produces("application/json")]
         [HttpPost]
-        public async Task<IActionResult> MaterialSalesOrder([FromBody] MaterialSalesOrderRequest request, [FromHeader(Name = "SAP-API-Key")] string _)
+        public async Task<IActionResult> MaterialSalesOrder([FromBody] MaterialSalesOrderRequest request, [FromHeader(Name = "API-Key")] string _, [FromHeader(Name = "Client-Credential-Option")] string? clientCredentialOption)
         {
             var endpointAddress = new EndpointAddress(_setting.CurrentValue.SAP.EndPoints.ManageSalesOrderIn);
 
@@ -147,9 +148,11 @@ namespace SAP_API.Controllers
 
             _logger.LogInformation("api: {actionName}, user: {user}, request: {request}", ControllerContext.ActionDescriptor.ActionName, request.User, JsonConvert.SerializeObject(request));
             var client = new ManageSalesOrderInClient(binding, endpointAddress);
-            client.ClientCredentials.UserName.UserName = _setting.CurrentValue.SAP.ClientCredentials.UserName;
-            client.ClientCredentials.UserName.Password = _setting.CurrentValue.SAP.ClientCredentials.Password;
-            var temp = Sample.MaterialSalesOrder;
+            var (userName, password) = CredentialHelper.GetCredentials(_setting, clientCredentialOption);
+
+            client.ClientCredentials.UserName.UserName = userName;
+            client.ClientCredentials.UserName.Password = password;
+
             var response = await client.MaintainBundleAsync(request.Payload);
 
             _logger.LogInformation("api: {actionName}, user: {user}, response: {response}", ControllerContext.ActionDescriptor.ActionName, request.User, JsonConvert.SerializeObject(response));
@@ -168,7 +171,7 @@ namespace SAP_API.Controllers
         /// <remarks>
         /// Sample request:
         ///
-        ///     POST /api/ManageSalesOrderIn/ProjectSalesOrder
+        ///     POST /api/SAP/ManageSalesOrderIn/ProjectSalesOrder
         ///     {
         ///        "Payload": {
         ///           "SalesOrder": [
@@ -297,7 +300,7 @@ namespace SAP_API.Controllers
         [ProducesResponseType(typeof(ApiErrorResponse<ErrorCodes>), 500)]
         [Produces("application/json")]
         [HttpPost]
-        public async Task<IActionResult> ProjectSalesOrder([FromBody] ProjectSalesOrderRequest request, [FromHeader(Name = "SAP-API-Key")] string _)
+        public async Task<IActionResult> ProjectSalesOrder([FromBody] ProjectSalesOrderRequest request, [FromHeader(Name = "API-Key")] string _, [FromHeader(Name = "Client-Credential-Option")] string? clientCredentialOption)
         {
             var endpointAddress = new EndpointAddress(_setting.CurrentValue.SAP.EndPoints.ManageSalesOrderIn);
 
@@ -310,9 +313,11 @@ namespace SAP_API.Controllers
 
             _logger.LogInformation("api: {actionName}, user: {user}, request: {request}", ControllerContext.ActionDescriptor.ActionName, request.User, JsonConvert.SerializeObject(request));
             var client = new ManageSalesOrderInClient(binding, endpointAddress);
-            client.ClientCredentials.UserName.UserName = _setting.CurrentValue.SAP.ClientCredentials.UserName;
-            client.ClientCredentials.UserName.Password = _setting.CurrentValue.SAP.ClientCredentials.Password;
-            var temp = Sample.ProjectSalesOrder;
+            var (userName, password) = CredentialHelper.GetCredentials(_setting, clientCredentialOption);
+
+            client.ClientCredentials.UserName.UserName = userName;
+            client.ClientCredentials.UserName.Password = password;
+
             var response = await client.MaintainBundleAsync(request.Payload);
 
             _logger.LogInformation("api: {actionName}, user: {user}, response: {response}", ControllerContext.ActionDescriptor.ActionName, request.User, JsonConvert.SerializeObject(response));

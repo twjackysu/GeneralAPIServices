@@ -26,6 +26,7 @@
     {
         public required SAPEndPoints EndPoints { get; set; }
         public required ClientCredentials ClientCredentials { get; set; }
+        public required ClientCredentials ClientCredentials2 { get; set; }
     }
     public class QAD
     {

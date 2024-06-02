@@ -6,13 +6,14 @@ using Newtonsoft.Json;
 using SAP_API.Common;
 using SAP_API.Configuration;
 using SAP_API.DTO.Request;
+using SAP_API.Utilities;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 
-namespace SAP_API.Controllers
+namespace SAP_API.Controllers.SAPControllers
 {
     [ApiController]
-    [Route("api/[controller]/[action]")]
+    [Route("api/SAP/[controller]/[action]")]
     public class ManageSupplierInvoiceInController : ControllerBase
     {
         private readonly ILogger<ManageSupplierInvoiceInController> _logger;
@@ -32,7 +33,7 @@ namespace SAP_API.Controllers
         /// <remarks>
         /// Sample request:
         ///
-        ///     POST /api/ManageSupplierInvoiceIn/ProjectThirdPartySupplierInvoice
+        ///     POST /api/SAP/ManageSupplierInvoiceIn/ProjectThirdPartySupplierInvoice
         ///     {
         ///        "Payload": {
         ///           "SupplierInvoice": [
@@ -223,7 +224,7 @@ namespace SAP_API.Controllers
         [ProducesResponseType(typeof(ApiErrorResponse<ErrorCodes>), 500)]
         [Produces("application/json")]
         [HttpPost]
-        public async Task<IActionResult> ProjectThirdPartySupplierInvoice([FromBody] ProjectThirdPartySupplierInvoiceRequestRequest request, [FromHeader(Name = "SAP-API-Key")] string _)
+        public async Task<IActionResult> ProjectThirdPartySupplierInvoice([FromBody] ProjectThirdPartySupplierInvoiceRequestRequest request, [FromHeader(Name = "API-Key")] string _, [FromHeader(Name = "Client-Credential-Option")] string? clientCredentialOption)
         {
             var endpointAddress = new EndpointAddress(_setting.CurrentValue.SAP.EndPoints.ManageSupplierInvoiceIn);
 
@@ -236,8 +237,10 @@ namespace SAP_API.Controllers
 
             _logger.LogInformation("api: {actionName}, user: {user}, request: {request}", ControllerContext.ActionDescriptor.ActionName, request.User, JsonConvert.SerializeObject(request));
             var client = new ManageSupplierInvoiceInClient(binding, endpointAddress);
-            client.ClientCredentials.UserName.UserName = _setting.CurrentValue.SAP.ClientCredentials.UserName;
-            client.ClientCredentials.UserName.Password = _setting.CurrentValue.SAP.ClientCredentials.Password;
+            var (userName, password) = CredentialHelper.GetCredentials(_setting, clientCredentialOption);
+
+            client.ClientCredentials.UserName.UserName = userName;
+            client.ClientCredentials.UserName.Password = password;
 
             var response = await client.MaintainBundleAsync(request.Payload);
 
