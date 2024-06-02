@@ -5,6 +5,11 @@
         public required HashSet<string> ValidKeys { get; set; }
         public required SAP SAP { get; set; }
         public required QAD QAD { get; set; }
+        public required Swagger Swagger { get; set; }
+    }
+    public class Swagger
+    {
+        public required string DocumentFilter { get; set; }
     }
     public class SAPEndPoints
     {

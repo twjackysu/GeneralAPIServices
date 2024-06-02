@@ -5,6 +5,7 @@ using NLog.Web;
 using SAP_API.Common;
 using SAP_API.Configuration;
 using SAP_API.Middlewares;
+using SAP_API.Utilities;
 using System.Reflection;
 
 
@@ -41,6 +42,7 @@ try
         });
         var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
         options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
+        options.DocumentFilter<CustomDocumentFilter>();
     });
     builder.Services.AddScoped<IApiResponseFactory, ApiResponseFactory>();
     builder.Services.AddScoped<IMyResponseFactory, MyResponseFactory>();
