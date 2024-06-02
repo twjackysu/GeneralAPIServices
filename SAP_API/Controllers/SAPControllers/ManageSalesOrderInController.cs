@@ -166,7 +166,7 @@ namespace SAP_API.Controllers.SAPControllers
             }
         }
         /// <summary>
-        /// 銷售訂單-專案
+        /// 銷售訂單-專案 (含修改成本估算金額)
         /// </summary>
         /// <remarks>
         /// Sample request:
@@ -294,6 +294,45 @@ namespace SAP_API.Controllers.SAPControllers
         ///        },
         ///        "User": "Peter"
         ///     }
+        ///     POST /api/SAP/ManageSalesOrderIn/ProjectSalesOrder
+        ///     {
+        ///        "Payload": {
+        ///           "SalesOrder": [
+        ///              {
+        ///                 "ID": {
+        ///                    "Value": "2464"
+        ///                 },
+        ///                 "Item": [
+        ///                    {
+        ///                       "ID": "10",
+        ///                       "PriceAndTaxCalculationItem": {
+        ///                          "ItemPriceComponent": [
+        ///                             {
+        ///                                "UUID": {
+        ///                                   "Value": "1b2377a5-1e36-1eef-82ee-a9218248be5a"
+        ///                                },
+        ///                                "Rate": {
+        ///                                   "DecimalValue": 31125,
+        ///                                   "BaseDecimalValue": 1
+        ///                                },
+        ///                                "actionCode": 1,
+        ///                                "actionCodeSpecified": true
+        ///                             }
+        ///                          ],
+        ///                          "actionCode": 1,
+        ///                          "actionCodeSpecified": true
+        ///                       },
+        ///                       "actionCode": 3,
+        ///                       "actionCodeSpecified": true
+        ///                    }
+        ///                 ],
+        ///                 "actionCode": 3,
+        ///                 "actionCodeSpecified": true
+        ///              }
+        ///           ]
+        ///        },
+        ///        "User": "Daniel"
+        ///     }
         /// </remarks>
         [ProducesResponseType(typeof(ApiOkResponse<SalesOrderMaintainConfirmationBundle[]>), 200)]
         [ProducesResponseType(typeof(ApiErrorResponse<ErrorCodes>), 400)]
@@ -317,6 +356,8 @@ namespace SAP_API.Controllers.SAPControllers
 
             client.ClientCredentials.UserName.UserName = userName;
             client.ClientCredentials.UserName.Password = password;
+
+            var json = JsonConvert.SerializeObject(Sample.ProjectSalesOrderModifyCost, Formatting.Indented);
 
             var response = await client.MaintainBundleAsync(request.Payload);
 

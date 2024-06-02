@@ -223,5 +223,42 @@ namespace SAP_WSDL_Library.Connected_Services.ManageSalesOrderInNS
                 }
             ]
         };
+        public static SalesOrderMaintainRequestBundleMessage_sync ProjectSalesOrderModifyCost = new SalesOrderMaintainRequestBundleMessage_sync()
+        {
+            SalesOrder =
+            [
+                new SalesOrderMaintainRequest()
+                {
+                    actionCode = ActionCode.Item04,
+                    actionCodeSpecified = true,
+                    ID = new BusinessTransactionDocumentID(){
+                        Value = "2464"
+                    },
+                    Item = [
+                        new SalesOrderMaintainRequestItem(){
+                            actionCode = ActionCode.Item04,
+                            actionCodeSpecified = true,
+                            ID = "10",
+                            PriceAndTaxCalculationItem = new SalesOrderMaintainRequestPriceAndTaxCalculationItem(){
+                                actionCode = ActionCode.Item02,
+                                actionCodeSpecified = true,
+                                ItemPriceComponent = [
+                                    new SalesOrderMaintainRequestPriceAndTaxCalculationItemItemPriceComponent(){
+                                        actionCode = ActionCode.Item02,
+                                        actionCodeSpecified = true,
+                                        UUID = new UUID(){
+                                            Value = "1b2377a5-1e36-1eef-82ee-a9218248be5a"
+                                        },
+                                        Rate = new Rate(){
+                                            DecimalValue = 31125,
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        };
     }
 }
