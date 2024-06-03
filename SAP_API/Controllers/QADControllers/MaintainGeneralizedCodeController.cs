@@ -87,11 +87,6 @@ namespace SAP_API.Controllers.QADControllers
                 {
                     AuthenticationScheme = System.Net.AuthenticationSchemes.Basic
                 });
-            request = new MaintainGeneralizedCodeRequest()
-            {
-                Header = MaintainGeneralizedCodeRequestHeaderSample.Header,
-                Payload = Sample.MaintainGeneralizedCodePayload,
-            };
 
             _logger.LogInformation("api: {actionName}, user: {user}, request: {request}", ControllerContext.ActionDescriptor.ActionName, request.User, JsonConvert.SerializeObject(request));
             var client = new QdocWebServiceClient(binding, endpointAddress);
