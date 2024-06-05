@@ -11771,6 +11771,10 @@ namespace ManageSalesOrderInNS
         
         private MaintenanceAttachmentFolder itemAttachmentFolderField;
         
+        private string material_SpecField;
+        
+        private Amount material_priceField;
+        
         private bool itemScheduleLineListCompleteTransmissionIndicatorField;
         
         private bool itemScheduleLineListCompleteTransmissionIndicatorFieldSpecified;
@@ -12144,6 +12148,34 @@ namespace ManageSalesOrderInNS
             set
             {
                 this.itemAttachmentFolderField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Namespace="http://sap.com/xi/AP/CustomerExtension/BYD/A0L22", Order=23)]
+        public string Material_Spec
+        {
+            get
+            {
+                return this.material_SpecField;
+            }
+            set
+            {
+                this.material_SpecField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Namespace="http://sap.com/xi/AP/CustomerExtension/BYD/A0L22", Order=24)]
+        public Amount material_price
+        {
+            get
+            {
+                return this.material_priceField;
+            }
+            set
+            {
+                this.material_priceField = value;
             }
         }
         
@@ -15365,6 +15397,8 @@ namespace ManageSalesOrderInNS
         
         private bool sendConfirmationIndicatorFieldSpecified;
         
+        private string sO_TYPEField;
+        
         private bool itemListCompleteTransmissionIndicatorField;
         
         private bool itemListCompleteTransmissionIndicatorFieldSpecified;
@@ -16088,6 +16122,20 @@ namespace ManageSalesOrderInNS
             set
             {
                 this.sendConfirmationIndicatorFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Namespace="http://sap.com/xi/AP/CustomerExtension/BYD/A0L22", DataType="token", Order=46)]
+        public string SO_TYPE
+        {
+            get
+            {
+                return this.sO_TYPEField;
+            }
+            set
+            {
+                this.sO_TYPEField = value;
             }
         }
         

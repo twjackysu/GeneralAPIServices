@@ -47,6 +47,7 @@ namespace SAP_API.Controllers.SAPControllers
         ///                    "languageCode": "ZF",
         ///                    "Value": "ACS112162 洲美機電-台大癌醫及質子中心高低壓測試支援"
         ///                 },
+        ///                 "SO_TYPE": "121",
         ///                 "DataOriginTypeCode": "5",
         ///                 "ReleaseAllItemsToExecution": true,
         ///                 "ReleaseAllItemsToExecutionSpecified": true,
@@ -183,6 +184,7 @@ namespace SAP_API.Controllers.SAPControllers
         ///                    "languageCode": "ZF",
         ///                    "Value": "ACS112162_BPM串接測試"
         ///                 },
+        ///                 "SO_TYPE": "121",
         ///                 "DataOriginTypeCode": "5",
         ///                 "AccountParty": {
         ///                    "PartyID": {

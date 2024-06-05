@@ -21,6 +21,7 @@ namespace SAP_WSDL_Library.Connected_Services.ManageSalesOrderInNS
                         Value = "ACS112162 洲美機電-台大癌醫及質子中心高低壓測試支援",
                         languageCode = "ZF"
                     },
+                    SO_TYPE = "121",
                     SalesUnitParty = new SalesOrderMaintainRequestPartyIDParty(){
                         actionCode = ActionCode.Item04,
                         actionCodeSpecified = true,
@@ -113,7 +114,7 @@ namespace SAP_WSDL_Library.Connected_Services.ManageSalesOrderInNS
                         Value = "ACS112162_BPM串接測試",
                         languageCode = "ZF"
                     },
-
+                    SO_TYPE = "121",
                     SalesUnitParty =  new SalesOrderMaintainRequestPartyIDParty(){
                         actionCode = ActionCode.Item04,
                         actionCodeSpecified = true,
