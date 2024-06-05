@@ -13,6 +13,9 @@
     }
     public class SAPEndPoints
     {
+        public required string CreateProject { get; set; }
+        public required string QuerySiteLogisticsTaskIn { get; set; }
+        public required string ManageSiteLogisticsTaskIn { get; set; }
         public required string CreateProjectPurchaseRequest { get; set; }
         public required string InventoryProcessingGoodsAndActivityConfirmationGoodsConfirmationIn { get; set; }
         public required string InventoryProcessingGoodsAndActivityConfirmationGoodsMovementIn { get; set; }
