@@ -3,7 +3,6 @@ using MaintainGeneralizedCodeNS;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
-using QAD_WSDL_Library.Connected_Services.MaintainGeneralizedCodeNS;
 using SAP_API.Common;
 using SAP_API.Configuration;
 using SAP_API.DTO.Request;
