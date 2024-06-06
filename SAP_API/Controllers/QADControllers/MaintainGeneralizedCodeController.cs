@@ -82,10 +82,8 @@ namespace SAP_API.Controllers.QADControllers
 
             var binding = new CustomBinding(
                 new MtomMessageEncodingBindingElement(),
-                new HttpsTransportBindingElement
-                {
-                    AuthenticationScheme = System.Net.AuthenticationSchemes.Basic
-                });
+                new HttpTransportBindingElement
+                {});
 
             _logger.LogInformation("api: {actionName}, user: {user}, request: {request}", ControllerContext.ActionDescriptor.ActionName, request.User, JsonConvert.SerializeObject(request));
             var client = new QdocWebServiceClient(binding, endpointAddress);
