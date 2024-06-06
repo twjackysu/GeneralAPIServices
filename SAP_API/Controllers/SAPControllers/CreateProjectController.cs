@@ -29,7 +29,7 @@ namespace SAP_API.Controllers.SAPControllers
         }
 
         /// <summary>
-        /// 專案
+        /// 專案(打銷售訂單也要打專案)
         /// </summary>
         /// <remarks>
         /// Sample request:
