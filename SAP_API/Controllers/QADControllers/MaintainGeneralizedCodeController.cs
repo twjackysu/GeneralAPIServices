@@ -80,10 +80,7 @@ namespace SAP_API.Controllers.QADControllers
         {
             var endpointAddress = new EndpointAddress(_setting.CurrentValue.QAD.EndPoints.MaintainGeneralizedCode);
 
-            var binding = new CustomBinding(
-                new MtomMessageEncodingBindingElement(),
-                new HttpTransportBindingElement
-                {});
+            var binding = new BasicHttpBinding();
 
             _logger.LogInformation("api: {actionName}, user: {user}, request: {request}", ControllerContext.ActionDescriptor.ActionName, request.User, JsonConvert.SerializeObject(request));
             var client = new QdocWebServiceClient(binding, endpointAddress);
