@@ -7,8 +7,6 @@ using SAP_API.Common;
 using SAP_API.Configuration;
 using SAP_API.DTO.Request;
 using SAP_API.Utilities;
-using SAP_WSDL_Library.Connected_Services.CreateProjectPurchaseRequestNS;
-using System.Reflection;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 
@@ -35,7 +33,7 @@ namespace SAP_API.Controllers.SAPControllers
         /// <remarks>
         /// Sample request:
         ///
-        ///     POST /api/SAP/ManagePurchaseRequestIn/ProjectThirdPartyPurchaseRequest
+        ///     POST /api/SAP/CreateProjectPurchaseRequest/ProjectThirdPartyPurchaseRequest
         ///     {
         ///        "Payload": {
         ///           "ZProjectPurchaseRequestAPI": {
@@ -187,7 +185,7 @@ namespace SAP_API.Controllers.SAPControllers
                 {
                     AuthenticationScheme = System.Net.AuthenticationSchemes.Basic
                 });
-            var json = JsonConvert.SerializeObject(Sample.ProjectThirdPartyPurchaseRequestSample);
+
             _logger.LogInformation("api: {actionName}, user: {user}, request: {request}", ControllerContext.ActionDescriptor.ActionName, request.User, JsonConvert.SerializeObject(request));
             var client = new YGQJ2RDPY_CustomCreateProjectPurchaseRequestClient(binding, endpointAddress);
 

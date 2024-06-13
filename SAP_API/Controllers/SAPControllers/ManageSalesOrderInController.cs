@@ -7,7 +7,6 @@ using SAP_API.Common;
 using SAP_API.Configuration;
 using SAP_API.DTO.Request;
 using SAP_API.Utilities;
-using SAP_WSDL_Library.Connected_Services.ManageSalesOrderInNS;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 
@@ -354,12 +353,11 @@ namespace SAP_API.Controllers.SAPControllers
 
             _logger.LogInformation("api: {actionName}, user: {user}, request: {request}", ControllerContext.ActionDescriptor.ActionName, request.User, JsonConvert.SerializeObject(request));
             var client = new ManageSalesOrderInClient(binding, endpointAddress);
+
             var (userName, password) = CredentialHelper.GetCredentials(_setting, clientCredentialOption);
 
             client.ClientCredentials.UserName.UserName = userName;
             client.ClientCredentials.UserName.Password = password;
-
-            var json = JsonConvert.SerializeObject(Sample.ProjectSalesOrderModifyCost, Formatting.Indented);
 
             var response = await client.MaintainBundleAsync(request.Payload);
 
