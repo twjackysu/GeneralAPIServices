@@ -2,10 +2,10 @@ name: Build
 on:
   workflow_dispatch:
 env:
-  AZURE_WEBAPP_PACKAGE_PATH: SAP_API\publish
+  AZURE_WEBAPP_PACKAGE_PATH: API\publish
   CONFIGURATION: Release
   DOTNET_CORE_VERSION: 8.0.x
-  WORKING_DIRECTORY: SAP_API
+  WORKING_DIRECTORY: API
 jobs:
   build:
     runs-on: windows-latest
