@@ -22,7 +22,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\QAD_WSDL_Library\QAD_WSDL_Library.csproj" />
-    <ProjectReference Include="..\SAP_WSDL_Library\SAP_WSDL_Library.csproj" />
   </ItemGroup>
 
 </Project>
