@@ -37,7 +37,7 @@ try
         options.SwaggerDoc("v1", new OpenApiInfo
         {
             Version = "v1",
-            Title = "SAP API",
+            Title = "API",
             Description = "Convert SOAP api body from xml to json",
         });
         var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";

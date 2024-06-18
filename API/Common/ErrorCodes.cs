@@ -3,7 +3,6 @@
     public enum ErrorCodes
     {
         InternalServerError = 1050000,
-        InternalServerErrorSAPError = 1050000,
         NotFound = 1040400,
         BadRequest = 1040000,
         BadRequestKeyNotFound = 1040001,
