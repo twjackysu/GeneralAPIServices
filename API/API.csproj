@@ -11,8 +11,8 @@
   <ItemGroup>
     <PackageReference Include="DotnetSdkUtilities" Version="1.0.3" />
     <PackageReference Include="NLog" Version="5.3.2" />
-    <PackageReference Include="NLog.Web.AspNetCore" Version="5.3.10" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+    <PackageReference Include="NLog.Web.AspNetCore" Version="5.3.11" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
     <PackageReference Include="System.ServiceModel.Duplex" Version="6.0.*" />
     <PackageReference Include="System.ServiceModel.Federation" Version="8.0.0" />
     <PackageReference Include="System.ServiceModel.Http" Version="8.0.0" />
